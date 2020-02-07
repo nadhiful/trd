@@ -1,0 +1,10 @@
+<?php 
+require('css.php');
+require('navbar.php');
+require('search.php');
+require('aside.php');
+require('content-header.php');
+require('konten.php');
+require('footer.php');
+require('skrip.php');
+ ?>
