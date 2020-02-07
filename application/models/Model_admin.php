@@ -30,7 +30,7 @@ class Model_admin extends CI_Model {
 		if ($trigger=="vision") {
 			$hasil = $this->db->select('*')
 							  ->from('post')
-							  ->where('id_kategori',3)
+							  ->where('id_kategori',2)
 							  ->limit(1)
 							  ->get();
 			if ($hasil->num_rows() > 0 ) {
@@ -41,7 +41,7 @@ class Model_admin extends CI_Model {
 		}elseif($trigger=="mission"){
 			$hasil = $this->db->select('*')
 							  ->from('post')
-							  ->where('id_kategori',4)
+							  ->where('id_kategori',3)
 							  ->limit(1)
 							  ->get();
 			if ($hasil->num_rows() > 0 ) {
@@ -59,6 +59,18 @@ class Model_admin extends CI_Model {
 							  ->from('post as a')
 							  ->join('kategori as b','a.id_kategori = b.id_kategori','inner')
 							  ->where('a.id_kategori = 1')
+							  ->limit(1)
+							  ->get();
+			if($hasil->num_rows() > 0){
+				return $hasil->result();
+				}else{
+					 return array();
+				}
+		}elseif ($trigger=="diesel_profile") {
+			$hasil = $this->db->select('a.*,b.*')
+							  ->from('post as a')
+							  ->join('kategori as b', 'a.id_kategori = b.id_kategori','inner')
+							  ->where('a.id_kategori = 4')
 							  ->limit(1)
 							  ->get();
 			if($hasil->num_rows() > 0){
@@ -102,7 +114,7 @@ class Model_admin extends CI_Model {
 	function update_data($trigger)
 	{
 		if($trigger == "visi") {
-			$hasil 	= 	$this->db->where('id_kategori', 3)
+			$hasil 	= 	$this->db->where('id_kategori', 2)
 								 ->from('post')
 								 ->get();
 			foreach ($hasil->result() as $key) {
@@ -114,7 +126,7 @@ class Model_admin extends CI_Model {
 		redirect('Admin/vision');
 
 		}elseif($trigger == "misi") {
-			$hasil 	= 	$this->db->where('id_kategori', 4)
+			$hasil 	= 	$this->db->where('id_kategori', 3)
 								 ->from('post')
 								 ->get();
 			foreach ($hasil->result() as $key) {
@@ -145,6 +157,17 @@ class Model_admin extends CI_Model {
 		}elseif ($trigger == "diesel_a") {
 			$var = $this->getdatafromUserInput('diesel_a');
 			$this->db->insert('post', $var);
+			redirect('Admin/add_diesel');
+		}elseif ($trigger == "diesel_u") {
+			$hasil 	= 	$this->db->where('id_kategori', 4)
+								 ->from('post')
+								 ->get();
+			foreach ($hasil->result() as $key) {
+				$id 	= $key->id;
+			}
+			$var = $this->getdatafromUserInput('diesel_u');
+			$this->db->where('id', $id)
+				 	 ->update('post',$var);
 			redirect('Admin/add_diesel');
 		}
 
@@ -199,7 +222,7 @@ class Model_admin extends CI_Model {
 		}elseif ($awal == "misi") {
 			if ($index == "u") {
 				$data=array(
-			            'id_kategori' 	=> 4,
+			            'id_kategori' 	=> 3,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
@@ -212,7 +235,7 @@ class Model_admin extends CI_Model {
 		}elseif ($awal == "visi") {
 			if ($index == "u") {
 				$data=array(
-			            'id_kategori' 	=> 3,
+			            'id_kategori' 	=> 2,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
@@ -225,7 +248,7 @@ class Model_admin extends CI_Model {
 		}elseif ($awal == "diesel") {
 			if ($index == "a") {
 				$data=array(
-			            'id_kategori' 	=> 2,
+			            'id_kategori' 	=> 4,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
@@ -238,7 +261,7 @@ class Model_admin extends CI_Model {
 			} elseif ($index == "u") {
 				if(!empty($_FILES["images"]["name"])) {
 			    $data=array(
-			            'id_kategori' 	=> 2,
+			            'id_kategori' 	=> 4,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
@@ -249,11 +272,11 @@ class Model_admin extends CI_Model {
 			    return $data;
 			} else {
 				$data=array(
-			            'id_kategori' 	=> 2,
+			            'id_kategori' 	=> 4,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'images'		=> $this->input->post('old_image'),
+			            'images'		=> $this->input->post('old_images'),
 			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
