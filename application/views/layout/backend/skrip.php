@@ -6,17 +6,31 @@
 <!-- overlayScrollbars -->
 <script src="<?php echo base_url('assets/backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo base_url('assets/backend/js/adminlte.js') ?>"></script>
+<script src="<?php echo base_url('assets/backend/js/adminlte.min.js') ?>"></script>
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="<?php echo base_url('assets/backend/js/demo.js') ?>"></script>
+<script src="<?php echo base_url('assets/backend/js/pages/dashboard2.js') ?>"></script>
+<!-- jQuery -->
 
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-<script src="<?php echo base_url('assets/backend/plugins/jquery-mousewheel/jquery.mousewheel.js') ?>"></script>
-<script src="<?php echo base_url('assets/backend/plugins/raphael/raphael.min.js') ?>"></script>
+<!-- DataTables -->
+<script src="<?php echo base_url('assets/backend/plugins/datatables/jquery.dataTables.js')?>"></script>
+<script src="<?php echo base_url('assets/backend/plugins/datatables-bs4/js/dataTables.bootstrap4.js')?>"></script>
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
 
 <!-- PAGE SCRIPTS -->
-<script src="<?php echo base_url('assets/backend/js/pages/dashboard2.js') ?>"></script>
+
 </body>
 </html>
