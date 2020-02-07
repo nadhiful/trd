@@ -183,6 +183,18 @@ class Admin extends CI_Controller {
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
+//=====================Panel Untuk Routing Unit Product===============================================//
+   function diesel_product()
+   {
+        $data = array(
+                        'title'     => 'Diesel Manufacture Page',
+                        'isi'       => 'backend/dashboard/product_diesel',
+                        'label'     => 'Unit Diesel Manufacture',
+                        'label2'    => 'Compose Unit Product'
+                        
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
 
 }
 
