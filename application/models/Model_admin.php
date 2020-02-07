@@ -109,26 +109,34 @@ class Model_admin extends CI_Model {
 	{
 		if ($trigger == 'profile') {
 			$name 						= 'profile_';
+			$folder 					= './upload/profile/';
 		}elseif ($trigger == 'diesel_a_pr') {
 			$name 						= 'diesel_profile_';
+			$folder 					= './upload/profile/';
 		}elseif ($trigger == 'marine_a_pr') {
 			$name 						= 'marine_profile_';
+			$folder 					= './upload/profile/';
 		}elseif ($trigger == 'machine_a_pr') {
 			$name 						= 'machine_profile_';
+			$folder 					= './upload/profile/';
 		}elseif ($trigger == 'profile_u') {
 			$name 						= 'profile_update_';
+			$folder 					= './upload/profile/';
 		}elseif ($trigger == 'diesel_u_pr') {
 			$name 						= 'diesel_profile_update_';
+			$folder 					= './upload/profile/';
 		}elseif ($trigger == 'marine_u_pr') {
 			$name 						= 'marine_profile_update_';
+			$folder 					= './upload/profile/';
 		}elseif ($trigger == 'machine_u_pr') {
 			$name 						= 'machine_profile_update_';
+			$folder 					= './upload/profile/';
 		}
 
 		$dateString 					= date('Y-m-d');
 		$myDate 						= new DateTime($dateString);
 		$formattedDate 					= $myDate->format('Y m d');
-		$config['upload_path']          = './upload/';
+	    $config['upload_path']          = $folder;
 	    $config['allowed_types']        = 'gif|jpg|png';
 	    $config['file_name']			= $name.$formattedDate;
 	    $config['overwrite']			= true;
@@ -428,8 +436,6 @@ class Model_admin extends CI_Model {
 			}
 		}
 		
-
-
 	}
 
 
