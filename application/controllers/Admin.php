@@ -142,7 +142,7 @@ class Admin extends CI_Controller {
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
-   
+
      function marine()
    {
         $data = array(
@@ -152,6 +152,17 @@ class Admin extends CI_Controller {
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
+     function add_marine()
+   {
+        $data = array(
+                        'title'     => 'Sentosa Marine Page',
+                        'isi'       => 'backend/dashboard/add_marine',
+                        'label'     => 'Sentosa Marine',
+                        'data'      => $this->Model_admin->getdataById('marine_profile')
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+
      function machine()
    {
         $data = array(
