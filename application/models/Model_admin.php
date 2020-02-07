@@ -101,7 +101,18 @@ class Model_admin extends CI_Model {
 			$name 						= 'diesel_profile_';
 		}elseif ($trigger == 'marine_a_pr') {
 			$name 						= 'marine_profile_';
+		}elseif ($trigger == 'machine_a_pr') {
+			$name 						= 'machine_profile_';
+		}elseif ($trigger == 'profile_u') {
+			$name 						= 'profile_update';
+		}elseif ($trigger == 'diesel_u_pr') {
+			$name 						= 'diesel_profile_update';
+		}elseif ($trigger == 'marine_u_pr') {
+			$name 						= 'marine_profile_update';
+		}elseif ($trigger == 'machine_u_pr') {
+			$name 						= 'machine_profile_update';
 		}
+
 
 		$dateString 					= date('Y-m-d');
 		$myDate 						= new DateTime($dateString);
@@ -134,11 +145,10 @@ class Model_admin extends CI_Model {
 			foreach ($hasil->result() as $key) {
 				$id 	= $key->id;
 			}
-		$var = $this->getdatafromUserInput("visi_u");
-		$this->db->where('id', $id)
-				 ->update('post',$var);
-		redirect('Admin/vision');
-
+			$var = $this->getdatafromUserInput("visi_u");
+			$this->db->where('id', $id)
+					 ->update('post',$var);
+			redirect('Admin/vision');
 		}elseif($trigger == "misi") {
 			$hasil 	= 	$this->db->where('id_kategori', 3)
 								 ->from('post')
@@ -146,16 +156,14 @@ class Model_admin extends CI_Model {
 			foreach ($hasil->result() as $key) {
 				$id 	= $key->id;
 			}
-		$var = $this->getdatafromUserInput("misi_u");
-		$this->db->where('id', $id)
-				 ->update('post',$var);
-		redirect('Admin/mission');
-		
+			$var = $this->getdatafromUserInput("misi_u");
+			$this->db->where('id', $id)
+					 ->update('post',$var);
+			redirect('Admin/mission');
 		}elseif($trigger == "profile_a") {
 			$var = $this->getdatafromUserInput("profil_a");
 			$this->db->insert('post', $var);
 			redirect('Admin/profile');
-
 		}elseif($trigger == "profile_u") {
 			$hasil 	= 	$this->db->where('id_kategori', 1)
 								 ->from('post')
@@ -167,7 +175,6 @@ class Model_admin extends CI_Model {
 			$this->db->where('id', $id)
 				 	 ->update('post',$var);
 			redirect('Admin/profile');
-			
 		}elseif ($trigger == "diesel_a") {
 			$var = $this->getdatafromUserInput('diesel_a');
 			$this->db->insert('post', $var);
@@ -191,13 +198,28 @@ class Model_admin extends CI_Model {
 			$hasil 	= 	$this->db->where('id_kategori', 5)
 								 ->from('post')
 								 ->get();
-			foreach ($hasil->result() as $key) {
-				$id 	= $key->id;
-			}
-			$var = $this->getdatafromUserInput('marine_u');
-			$this->db->where('id', $id)
-				 	 ->update('post',$var);
-			redirect('Admin/add_marine');
+				foreach ($hasil->result() as $key) {
+					$id 	= $key->id;
+				}
+				$var = $this->getdatafromUserInput('marine_u');
+				$this->db->where('id', $id)
+					 	 ->update('post',$var);
+				redirect('Admin/add_marine');
+		}elseif ($trigger == "machine_a") {
+			$var = $this->getdatafromUserInput('machine_a');
+			$this->db->insert('post', $var);
+			redirect('Admin/add_machine');
+		}elseif ($trigger == "machine_u") {
+			$hasil 	= 	$this->db->where('id_kategori', 6)
+								 ->from('post')
+								 ->get();
+				foreach ($hasil->result() as $key) {
+					$id 	= $key->id;
+				}
+				$var = $this->getdatafromUserInput('machine_u');
+				$this->db->where('id', $id)
+					 	 ->update('post',$var);
+				redirect('Admin/add_machine');
 		}
 
 	}
@@ -230,7 +252,7 @@ class Model_admin extends CI_Model {
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'images'		=> $this->_uploadImage('profile'),
+			            'images'		=> $this->_uploadImage('profile_u'),
 			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
@@ -297,7 +319,7 @@ class Model_admin extends CI_Model {
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'images'		=> $this->_uploadImage('diesel_a_pr'),
+			            'images'		=> $this->_uploadImage('diesel_u_pr'),
 			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
@@ -336,7 +358,7 @@ class Model_admin extends CI_Model {
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'images'		=> $this->_uploadImage('marine_a_pr'),
+			            'images'		=> $this->_uploadImage('marine_u_pr'),
 			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
@@ -354,8 +376,47 @@ class Model_admin extends CI_Model {
 			   		return $data;
 				}
 			}
+			// ========Get Input Machine Profile=========///
+		}elseif ($awal == "machine") {
+			if($index == "a") {
+				$data=array(
+			            'id_kategori' 	=> 6,
+			            'judul'			=> $this->input->post('judul'),
+			            'isi'			=> $this->input->post('isi'),
+			            'status'		=> 1,
+			            'images'		=> $this->_uploadImage('machine_a_pr'),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			        return $data;
+			        return TRUE;
+			}elseif ($index == "u") {
+				if (!empty($_FILES["images"]["name"])) {
+					$data=array(
+			            'id_kategori' 	=> 6,
+			            'judul'			=> $this->input->post('judul'),
+			            'isi'			=> $this->input->post('isi'),
+			            'status'		=> 1,
+			            'images'		=> $this->_uploadImage('machine_u_pr'),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			    	return $data;
+				}else {
+				$data=array(
+			            'id_kategori' 	=> 6,
+			            'judul'			=> $this->input->post('judul'),
+			            'isi'			=> $this->input->post('isi'),
+			            'status'		=> 1,
+			            'images'		=> $this->input->post('old_images'),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			   		return $data;
+				}
+			}
 		}
-
+		
 
 
 	}
