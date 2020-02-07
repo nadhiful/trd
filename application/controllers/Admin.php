@@ -173,6 +173,16 @@ class Admin extends CI_Controller {
         $this->load->view('layout/backend/wrapper', $data);
    }
 
+   function add_machine()
+   {
+        $data = array(
+                        'title'     => 'Machining Centre Page',
+                        'isi'       => 'backend/dashboard/add_machine',
+                        'label'     => 'Machining Centre',
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+
 }
 
 /* End of file Admin.php */

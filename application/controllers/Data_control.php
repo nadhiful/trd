@@ -78,6 +78,16 @@ class Data_control extends CI_Controller {
         $this->Model_admin->update_data("marine_u");
 
     }
+        function add_machine_profile()
+    {
+        $this->Model_admin->update_data("machine_a");
+
+    }
+       function update_machine_profile()
+    {
+        $this->Model_admin->update_data("machine_u");
+
+    }
 }
 
 /* End of file Data_control */
