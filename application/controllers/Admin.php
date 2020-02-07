@@ -179,6 +179,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Machining Centre Page',
                         'isi'       => 'backend/dashboard/add_machine',
                         'label'     => 'Machining Centre',
+                        'data'      => $this->Model_admin->getdataById('machine_profile')
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
