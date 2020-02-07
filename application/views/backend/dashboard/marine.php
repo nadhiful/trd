@@ -18,7 +18,9 @@
                   <!-- text input -->
                   <div class="form-group">
                     <label>Feature Image</label>
+                    <a href="<?php echo site_url('Admin/add_marine') ?>">
                     <img src="https://ak4.picdn.net/shutterstock/videos/17274994/thumb/1.jpg" height="300" width="480">
+                    </a>
                   </div>
                 </div>
               </div>

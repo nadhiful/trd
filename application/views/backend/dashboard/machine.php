@@ -18,7 +18,9 @@
                   <!-- text input -->
                   <div class="form-group">
                     <label>Feature Image</label>
+                    <a href="<?php echo site_url('Admin/add_machine') ?>">
                     <img src="https://i0.wp.com/www.pengelasan.net/wp-content/uploads/2017/04/Pengertian-Welder-adalah.jpg" height="300" width="480">
+                    </a>
                   </div>
                 </div>
               </div>
