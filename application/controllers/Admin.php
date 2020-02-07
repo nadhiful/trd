@@ -142,6 +142,7 @@ class Admin extends CI_Controller {
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
+   
      function marine()
    {
         $data = array(
