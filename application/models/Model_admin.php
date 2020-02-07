@@ -434,8 +434,36 @@ class Model_admin extends CI_Model {
 			   		return $data;
 				}
 			}
+		}elseif ($awal == "product-diesel") {
+			if ($index == 'a') {
+				$data=array(
+			            'id' 			=> $this->input->post('id_produk'),
+			            'id_kategori'	=> $this->input->post('kategori'),
+			            'nama'			=> $this->input->post('judul'),
+			            'deskripsi'		=> $this->input->post('isi'),
+			            'images'		=> $this->_uploadImage('diesel_produk'),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			        return $data;
+			        return TRUE;
+			}
 		}
-		
+
+	}
+
+	function insert_data($trigger)
+	{
+		$var 	= $trigger ;
+		$pecah 	= explode("_",$var);
+		$awal 	= $pecah[0];
+		$tengah	= $pecah[1];
+		$akhir  = $pecah[2]; 
+		if ($awal == 'product' && $tengah == 'diesel') {
+			if ($akhir == "a") {
+				$var = $this->getdatafromUserInput("product-diesel_a");
+			}
+		}
 	}
 
 

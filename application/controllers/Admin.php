@@ -190,11 +190,39 @@ class Admin extends CI_Controller {
                         'title'     => 'Diesel Manufacture Page',
                         'isi'       => 'backend/dashboard/product_diesel',
                         'label'     => 'Unit Diesel Manufacture',
-                        'label2'    => 'Compose Unit Product'
-                        
+                        'label2'    => 'Compose Unit Product',
+                        'th_menu1'  => 'ID Product',
+                        'th_menu2'  => 'Nama Unit',
+                        'th_menu3'  => 'Deskripsi',
+                        'th_menu4'  => 'Gambar',
+                        'th_menu5'  => 'Aksi',
+                        'id_produk' => $this->getKodeProduk("diesel")
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
+//=========================Panel Get Kode Produk =====================================================//
+   private function getKodeProduk($trigger)
+    {
+       if ($trigger == 'diesel') {
+            $q = $this->db->query("select MAX(RIGHT(id,3)) as kd_max from product");
+            $kd = "";
+            if($q->num_rows()>0)
+            {
+                foreach($q->result() as $k)
+                {
+                    $tmp = ((int)$k->kd_max)+1;
+                    $kd = sprintf("%03s", $tmp);
+                }
+            }
+            else
+            {
+                $kd = "001";
+            }
+            return "DS-".$kd;
+       }
+    }
+//=========================Panel Get Kode Produk =====================================================//
+
 
 }
 
