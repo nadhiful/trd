@@ -90,6 +90,18 @@ class Model_admin extends CI_Model {
 				}else{
 					 return array();
 				}
+		}elseif ($trigger == "machine_profile") {
+			$hasil = $this->db->select('a.*,b.*')
+							  ->from('post as a')
+							  ->join('kategori as b', 'a.id_kategori = b.id_kategori','inner')
+							  ->where('a.id_kategori = 6')
+							  ->limit(1)
+							  ->get();
+			if($hasil->num_rows() > 0){
+				return $hasil->result();
+				}else{
+					 return array();
+				}
 		}
 	}
 //====================Modul Upload Gambar ========================//
@@ -104,15 +116,14 @@ class Model_admin extends CI_Model {
 		}elseif ($trigger == 'machine_a_pr') {
 			$name 						= 'machine_profile_';
 		}elseif ($trigger == 'profile_u') {
-			$name 						= 'profile_update';
+			$name 						= 'profile_update_';
 		}elseif ($trigger == 'diesel_u_pr') {
-			$name 						= 'diesel_profile_update';
+			$name 						= 'diesel_profile_update_';
 		}elseif ($trigger == 'marine_u_pr') {
-			$name 						= 'marine_profile_update';
+			$name 						= 'marine_profile_update_';
 		}elseif ($trigger == 'machine_u_pr') {
-			$name 						= 'machine_profile_update';
+			$name 						= 'machine_profile_update_';
 		}
-
 
 		$dateString 					= date('Y-m-d');
 		$myDate 						= new DateTime($dateString);
