@@ -78,6 +78,18 @@ class Model_admin extends CI_Model {
 				}else{
 					 return array();
 				}
+		}elseif ($trigger=="marine_profile") {
+			$hasil = $this->db->select('a.*,b.*')
+							  ->from('post as a')
+							  ->join('kategori as b', 'a.id_kategori = b.id_kategori','inner')
+							  ->where('a.id_kategori = 5')
+							  ->limit(1)
+							  ->get();
+			if($hasil->num_rows() > 0){
+				return $hasil->result();
+				}else{
+					 return array();
+				}
 		}
 	}
 //====================Modul Upload Gambar ========================//
@@ -87,6 +99,8 @@ class Model_admin extends CI_Model {
 			$name 						= 'profile_';
 		}elseif ($trigger == 'diesel_a_pr') {
 			$name 						= 'diesel_profile_';
+		}elseif ($trigger == 'marine_a_pr') {
+			$name 						= 'marine_profile_';
 		}
 
 		$dateString 					= date('Y-m-d');
@@ -169,6 +183,21 @@ class Model_admin extends CI_Model {
 			$this->db->where('id', $id)
 				 	 ->update('post',$var);
 			redirect('Admin/add_diesel');
+		}elseif ($trigger == "marine_a") {
+			$var = $this->getdatafromUserInput('marine_a');
+			$this->db->insert('post', $var);
+			redirect('Admin/add_marine');
+		}elseif ($trigger == "marine_u") {
+			$hasil 	= 	$this->db->where('id_kategori', 5)
+								 ->from('post')
+								 ->get();
+			foreach ($hasil->result() as $key) {
+				$id 	= $key->id;
+			}
+			$var = $this->getdatafromUserInput('marine_u');
+			$this->db->where('id', $id)
+				 	 ->update('post',$var);
+			redirect('Admin/add_marine');
 		}
 
 	}
@@ -219,6 +248,7 @@ class Model_admin extends CI_Model {
 			   		return $data;
 				}	
 			}
+			// ========Get Input Misi Profile=========///	
 		}elseif ($awal == "misi") {
 			if ($index == "u") {
 				$data=array(
@@ -232,6 +262,7 @@ class Model_admin extends CI_Model {
 				return $data;
 				return true;
 			}
+			// ========Get Input Visi Profile=========///	
 		}elseif ($awal == "visi") {
 			if ($index == "u") {
 				$data=array(
@@ -245,6 +276,7 @@ class Model_admin extends CI_Model {
 				return $data;
 				return true;
 			}
+		// ========Get Input Diesel Profile=========///	
 		}elseif ($awal == "diesel") {
 			if ($index == "a") {
 				$data=array(
@@ -283,7 +315,49 @@ class Model_admin extends CI_Model {
 			   		return $data;
 				}	
 			}
+		// ========Get Input Marine Profile=========///
+		}elseif ($awal == "marine") {
+			if ($index == "a") {
+				$data=array(
+			            'id_kategori' 	=> 5,
+			            'judul'			=> $this->input->post('judul'),
+			            'isi'			=> $this->input->post('isi'),
+			            'status'		=> 1,
+			            'images'		=> $this->_uploadImage('marine_a_pr'),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			        return $data;
+			        return TRUE;
+			} elseif ($index == "u") {
+				if (!empty($_FILES["images"]["name"])) {
+					$data=array(
+			            'id_kategori' 	=> 5,
+			            'judul'			=> $this->input->post('judul'),
+			            'isi'			=> $this->input->post('isi'),
+			            'status'		=> 1,
+			            'images'		=> $this->_uploadImage('marine_a_pr'),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			    	return $data;
+				}else {
+				$data=array(
+			            'id_kategori' 	=> 5,
+			            'judul'			=> $this->input->post('judul'),
+			            'isi'			=> $this->input->post('isi'),
+			            'status'		=> 1,
+			            'images'		=> $this->input->post('old_images'),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			   		return $data;
+				}
+			}
 		}
+
+
+
 	}
 
 
