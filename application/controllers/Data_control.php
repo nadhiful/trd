@@ -63,6 +63,21 @@ class Data_control extends CI_Controller {
         $this->Model_admin->update_data("diesel_a");
 
     }
+       function update_diesel_profile()
+    {
+        $this->Model_admin->update_data("diesel_u");
+
+    }
+        function add_marine_profile()
+    {
+        $this->Model_admin->update_data("marine_a");
+
+    }
+       function update_marine_profile()
+    {
+        $this->Model_admin->update_data("marine_u");
+
+    }
 }
 
 /* End of file Data_control */
