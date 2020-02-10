@@ -63,7 +63,7 @@ class Model_admin extends CI_Model {
 		}
 	}
 //============Modul Get Data By ID==================//
-	function getdataById($trigger,$id)
+	function getdataById($trigger)
 	{
 		if ($trigger == 'profile') {
 			$hasil = $this->db->select('a.*,b.*')
@@ -113,17 +113,6 @@ class Model_admin extends CI_Model {
 				}else{
 					 return array();
 				}
-		}elseif ($trigger == "product_diesel") {
-			$hasil = $this->db->select('*')
-							  ->from('product')
-							  ->where('id_product',$id)
-							  ->get();
-			if ($hasil->num_rows() > 0 ) {
-				return $hasil->result();
-			}else{
-				return array();
-			}
-
 		}
 	}
 //====================Modul Upload Gambar ========================//
