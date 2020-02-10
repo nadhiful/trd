@@ -7,7 +7,7 @@ class Model_admin extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 	}
 // ============Modul Login=======================//
 	function check_user()
@@ -38,7 +38,7 @@ class Model_admin extends CI_Model {
 			}else{
 				return array();
 			}
-		}elseif($trigger=="mission"){
+		}elseif($trigger == "mission"){
 			$hasil = $this->db->select('*')
 							  ->from('post')
 							  ->where('id_kategori',3)
@@ -49,10 +49,21 @@ class Model_admin extends CI_Model {
 			}else{
 				return array();
 			}
+		}elseif($trigger == "diesel"){
+			$hasil =  $this->db->select('a.id_product,a.nama,a.deskripsi,b.nama as kategori,a.images')
+							   ->from('product as a')
+							   ->join('kategori_product as b','a.id_kategori = b.id','inner')
+							   ->where('a.id_kategori = 1')
+							   ->get();
+			if ($hasil->num_rows() > 0 ) {
+				return $hasil->result();
+			}else{
+				return array();
+			}
 		}
 	}
 //============Modul Get Data By ID==================//
-	function getdataById($trigger)
+	function getdataById($trigger,$id)
 	{
 		if ($trigger == 'profile') {
 			$hasil = $this->db->select('a.*,b.*')
@@ -102,35 +113,50 @@ class Model_admin extends CI_Model {
 				}else{
 					 return array();
 				}
+		}elseif ($trigger == "product_diesel") {
+			$hasil = $this->db->select('*')
+							  ->from('product')
+							  ->where('id_product',$id)
+							  ->get();
+			if ($hasil->num_rows() > 0 ) {
+				return $hasil->result();
+			}else{
+				return array();
+			}
+
 		}
 	}
 //====================Modul Upload Gambar ========================//
-	private function _uploadImage($trigger)
+	private function _uploadImage($trigger,$id)
 	{
-		if ($trigger == 'profile') {
+		if ($trigger == 'profile' AND $id == 0) {
 			$name 						= 'profile_';
 			$folder 					= './upload/profile/';
-		}elseif ($trigger == 'diesel_a_pr') {
+		}elseif ($trigger == 'diesel_a_pr' && $id == 0 ) {
 			$name 						= 'diesel_profile_';
 			$folder 					= './upload/profile/';
-		}elseif ($trigger == 'marine_a_pr') {
+		}elseif ($trigger == 'marine_a_pr' && $id == 0 ) {
 			$name 						= 'marine_profile_';
 			$folder 					= './upload/profile/';
-		}elseif ($trigger == 'machine_a_pr') {
+		}elseif ($trigger == 'machine_a_pr' && $id == 0 ) {
 			$name 						= 'machine_profile_';
 			$folder 					= './upload/profile/';
-		}elseif ($trigger == 'profile_u') {
+		}elseif ($trigger == 'profile_u' && $id == 0 ) {
 			$name 						= 'profile_update_';
 			$folder 					= './upload/profile/';
-		}elseif ($trigger == 'diesel_u_pr') {
+		}elseif ($trigger == 'diesel_u_pr' && $id == 0) {
 			$name 						= 'diesel_profile_update_';
 			$folder 					= './upload/profile/';
-		}elseif ($trigger == 'marine_u_pr') {
+		}elseif ($trigger == 'marine_u_pr'&& $id == 0 ) {
 			$name 						= 'marine_profile_update_';
 			$folder 					= './upload/profile/';
-		}elseif ($trigger == 'machine_u_pr') {
+		}elseif ($trigger == 'machine_u_pr' AND $id == 0 ) {
 			$name 						= 'machine_profile_update_';
 			$folder 					= './upload/profile/';
+		}elseif ($trigger == 'diesel_produk' && $id == 0) {
+			$index 						= $this->getKodeProduk("diesel");
+			$name 						= 'diesel_produk_'.$index."_";
+			$folder 					= './upload/product/';
 		}
 
 		$dateString 					= date('Y-m-d');
@@ -152,7 +178,16 @@ class Model_admin extends CI_Model {
 	    print_r($this->upload->display_errors());
 	    return "default.jpg";
 	}
+//====================Modul Delete Gambar ========================//
 
+	private function _deleteImage($trigger,$id)
+	{
+	    $product = $this->getdataById("product_diesel",$id);
+	    if ($product->images != "default.jpg") {
+		    $filename = explode(".", $product->image)[0];
+			return array_map('unlink', glob(FCPATH."upload/product/$filename.*"));
+	    }
+	}
 //============Modul Update Data ==================//
 
 	function update_data($trigger)
@@ -266,13 +301,13 @@ class Model_admin extends CI_Model {
 
 			}elseif ($index == "u") {
 				if(!empty($_FILES["images"]["name"])) {
+				$id=0;
 			    $data=array(
 			            'id_kategori' 	=> 1,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'images'		=> $this->_uploadImage('profile_u'),
-			            'date_created'	=> date('Y-m-d'),
+			            'images'		=> $this->_uploadImage('profile_u',$id),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
 			    return $data;
@@ -283,7 +318,6 @@ class Model_admin extends CI_Model {
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
 			            'images'		=> $this->input->post('old_image'),
-			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
 			   		return $data;
@@ -311,7 +345,6 @@ class Model_admin extends CI_Model {
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        );
 				return $data;
@@ -333,13 +366,13 @@ class Model_admin extends CI_Model {
 			        return TRUE;
 			} elseif ($index == "u") {
 				if(!empty($_FILES["images"]["name"])) {
+				$id=0;
 			    $data=array(
 			            'id_kategori' 	=> 4,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'images'		=> $this->_uploadImage('diesel_u_pr'),
-			            'date_created'	=> date('Y-m-d'),
+			            'images'		=> $this->_uploadImage('diesel_u_pr',$id),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
 			    return $data;
@@ -350,7 +383,6 @@ class Model_admin extends CI_Model {
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
 			            'images'		=> $this->input->post('old_images'),
-			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
 			   		return $data;
@@ -372,13 +404,13 @@ class Model_admin extends CI_Model {
 			        return TRUE;
 			} elseif ($index == "u") {
 				if (!empty($_FILES["images"]["name"])) {
+					$id=0;
 					$data=array(
 			            'id_kategori' 	=> 5,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'images'		=> $this->_uploadImage('marine_u_pr'),
-			            'date_created'	=> date('Y-m-d'),
+			            'images'		=> $this->_uploadImage('marine_u_pr',$id),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
 			    	return $data;
@@ -411,13 +443,13 @@ class Model_admin extends CI_Model {
 			        return TRUE;
 			}elseif ($index == "u") {
 				if (!empty($_FILES["images"]["name"])) {
+					$id = 0;
 					$data=array(
 			            'id_kategori' 	=> 6,
 			            'judul'			=> $this->input->post('judul'),
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
-			            'images'		=> $this->_uploadImage('machine_u_pr'),
-			            'date_created'	=> date('Y-m-d'),
+			            'images'		=> $this->_uploadImage('machine_u_pr',$id),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
 			    	return $data;
@@ -428,7 +460,6 @@ class Model_admin extends CI_Model {
 			            'isi'			=> $this->input->post('isi'),
 			            'status'		=> 1,
 			            'images'		=> $this->input->post('old_images'),
-			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
 			   		return $data;
@@ -436,12 +467,13 @@ class Model_admin extends CI_Model {
 			}
 		}elseif ($awal == "product-diesel") {
 			if ($index == 'a') {
+				$id = 0;
 				$data=array(
-			            'id' 			=> $this->input->post('id_produk'),
-			            'id_kategori'	=> $this->input->post('kategori'),
-			            'nama'			=> $this->input->post('judul'),
+			            'id_product'	=> $this->getKodeProduk("diesel"),
+			            'id_kategori'	=> 1,
+			            'nama'			=> $this->input->post('nama'),
 			            'deskripsi'		=> $this->input->post('isi'),
-			            'images'		=> $this->_uploadImage('diesel_produk'),
+			            'images'		=> $this->_uploadImage('diesel_produk',$id),
 			            'date_created'	=> date('Y-m-d'),
 			            'date_updated'	=> date('Y-m-d')
 	        		);
@@ -451,7 +483,7 @@ class Model_admin extends CI_Model {
 		}
 
 	}
-
+//=================Modul Get Insert From User ========================//
 	function insert_data($trigger)
 	{
 		$var 	= $trigger ;
@@ -462,12 +494,60 @@ class Model_admin extends CI_Model {
 		if ($awal == 'product' && $tengah == 'diesel') {
 			if ($akhir == "a") {
 				$var = $this->getdatafromUserInput("product-diesel_a");
+				$this->db->insert('product', $var);
+				redirect('Admin/diesel_product');
 			}
 		}
 	}
+//=================Modul Get Delete From User ========================//
+	function delete_data($trigger,$id)
+	{
+		if ($trigger == 'product_diesel_d') 
+		{
+			$this->_deleteImage("diesel",$id);
+			$this->db->where('id_product',$id)
+				 	 ->delete('product');
+			redirect('Admin/diesel_product');
+		}
+	}
 
-
-
+//=========================Panel Get Kode Produk =====================================================//
+   function getKodeProduk($trigger)
+    {
+       if ($trigger == 'diesel') {
+            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+            $kd = "";
+            if($q->num_rows()>0)
+            {
+                foreach($q->result() as $k)
+                {
+                    $tmp = ((int)$k->kd_max)+1;
+                    $kd = sprintf("%03s", $tmp);
+                }
+            }
+            else
+            {
+                $kd = "001";
+            }
+            return "DS-".$kd;
+       }
+    }
+//=========================Panel Get Kode Produk =====================================================//
+   function getkodeprodukKategori($trigger)
+    {
+        if ($trigger == "diesel"){
+           $hasil   =   $this->db->where('id',1)
+                                 ->from('kategori_product')
+                                 ->get();
+            if($hasil->num_rows() > 0){
+                $des = $hasil->result();
+                return $des;
+                }else{
+                return array();
+             }
+        }
+    }
+//=========================Panel Get Kode Produk =====================================================//
 
 
 
