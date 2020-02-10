@@ -104,7 +104,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Profile Page',
                         'isi'       => 'backend/dashboard/edit_profile',
                         'label'     => 'Profile',
-                        'data'      => $this->Model_admin->getdataById('profile')
+                        'data'      => $this->Model_admin->getdataById('profile',0)
 
                     );
         $this->load->view('layout/backend/wrapper', $data);
@@ -137,7 +137,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Diesel Manufacture Page',
                         'isi'       => 'backend/dashboard/add_diesel',
                         'label'     => 'Diesel Manufacture',
-                        'data'      => $this->Model_admin->getdataById('diesel_profile')
+                        'data'      => $this->Model_admin->getdataById('diesel_profile',0)
                         
                     );
         $this->load->view('layout/backend/wrapper', $data);
@@ -158,7 +158,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Sentosa Marine Page',
                         'isi'       => 'backend/dashboard/add_marine',
                         'label'     => 'Sentosa Marine',
-                        'data'      => $this->Model_admin->getdataById('marine_profile')
+                        'data'      => $this->Model_admin->getdataById('marine_profile',0)
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
@@ -179,7 +179,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Machining Centre Page',
                         'isi'       => 'backend/dashboard/add_machine',
                         'label'     => 'Machining Centre',
-                        'data'      => $this->Model_admin->getdataById('machine_profile')
+                        'data'      => $this->Model_admin->getdataById('machine_profile',0)
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
@@ -191,38 +191,17 @@ class Admin extends CI_Controller {
                         'isi'       => 'backend/dashboard/product_diesel',
                         'label'     => 'Unit Diesel Manufacture',
                         'label2'    => 'Compose Unit Product',
+                        'konten'    =>  $this->Model_admin->get_data('diesel'),
+                        'kategori'  =>  $this->Model_admin->getkodeprodukKategori("diesel"),
                         'th_menu1'  => 'ID Product',
                         'th_menu2'  => 'Nama Unit',
                         'th_menu3'  => 'Deskripsi',
                         'th_menu4'  => 'Gambar',
                         'th_menu5'  => 'Aksi',
-                        'id_produk' => $this->getKodeProduk("diesel")
+                        'id_produk' => $this->Model_admin->getKodeProduk("diesel")
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
-//=========================Panel Get Kode Produk =====================================================//
-   private function getKodeProduk($trigger)
-    {
-       if ($trigger == 'diesel') {
-            $q = $this->db->query("select MAX(RIGHT(id,3)) as kd_max from product");
-            $kd = "";
-            if($q->num_rows()>0)
-            {
-                foreach($q->result() as $k)
-                {
-                    $tmp = ((int)$k->kd_max)+1;
-                    $kd = sprintf("%03s", $tmp);
-                }
-            }
-            else
-            {
-                $kd = "001";
-            }
-            return "DS-".$kd;
-       }
-    }
-//=========================Panel Get Kode Produk =====================================================//
-
 
 }
 

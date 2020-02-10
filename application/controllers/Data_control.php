@@ -88,9 +88,15 @@ class Data_control extends CI_Controller {
         $this->Model_admin->update_data("machine_u");
 
     } function add_product_diesel()
+
     {
         $this->Model_admin->insert_data("product_diesel_a");
     }
+      function delete_product($id)
+    {
+        $this->Model_admin->delete_data("product_diesel_d",$id);
+    }
+
 }
 
 /* End of file Data_control */
