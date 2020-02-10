@@ -104,7 +104,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Profile Page',
                         'isi'       => 'backend/dashboard/edit_profile',
                         'label'     => 'Profile',
-                        'data'      => $this->Model_admin->getdataById('profile',0)
+                        'data'      => $this->Model_admin->getdataById('profile')
 
                     );
         $this->load->view('layout/backend/wrapper', $data);
@@ -137,7 +137,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Diesel Manufacture Page',
                         'isi'       => 'backend/dashboard/add_diesel',
                         'label'     => 'Diesel Manufacture',
-                        'data'      => $this->Model_admin->getdataById('diesel_profile',0)
+                        'data'      => $this->Model_admin->getdataById('diesel_profile')
                         
                     );
         $this->load->view('layout/backend/wrapper', $data);
@@ -158,7 +158,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Sentosa Marine Page',
                         'isi'       => 'backend/dashboard/add_marine',
                         'label'     => 'Sentosa Marine',
-                        'data'      => $this->Model_admin->getdataById('marine_profile',0)
+                        'data'      => $this->Model_admin->getdataById('marine_profile')
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
@@ -179,7 +179,7 @@ class Admin extends CI_Controller {
                         'title'     => 'Machining Centre Page',
                         'isi'       => 'backend/dashboard/add_machine',
                         'label'     => 'Machining Centre',
-                        'data'      => $this->Model_admin->getdataById('machine_profile',0)
+                        'data'      => $this->Model_admin->getdataById('machine_profile')
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
@@ -191,7 +191,7 @@ class Admin extends CI_Controller {
                         'isi'       => 'backend/dashboard/product_diesel',
                         'label'     => 'Unit Diesel Manufacture',
                         'label2'    => 'Compose Unit Product',
-                        'konten'    =>  $this->Model_admin->get_data('diesel'),
+                        'konten'    =>  $this->Model_admin->get_all('diesel'),
                         'kategori'  =>  $this->Model_admin->getkodeprodukKategori("diesel"),
                         'th_menu1'  => 'ID Product',
                         'th_menu2'  => 'Nama Unit',
