@@ -34,7 +34,7 @@
                       <label>Feature Image</label>
                       <br>
                       <?php 
-                      $product_image = ['src'   => 'upload/' . $key->images, 'height'   => '320']; 
+                      $product_image = ['src'   => 'upload/profile/' . $key->images, 'height'   => '320']; 
                       echo img($product_image);
                       ?>
                     </div>
