@@ -41,7 +41,7 @@
           <div class="card-header">
             <h3 class="card-title">Unit Product</h3>
           </div>
-          <form role="form">
+          
             <!-- /.card-header -->
             <div class="card-body">
               <div class="row">
@@ -59,7 +59,7 @@
             <div class="card-footer">
               
             </div>
-          </form>
+         
           <!-- /.card-body -->
         </div>
         <!-- /.card -->

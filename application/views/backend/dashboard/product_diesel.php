@@ -1,7 +1,3 @@
-<!-- References: https://github.com/fancyapps/fancyBox -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-
 <section class="content">
   <div class="row">
     <div class="col-12">
@@ -57,8 +53,9 @@
                     ?>
                 </td>
                 <td>
-              <a class="btn btn-danger" href="<?php echo site_url('Data_control/delete_product/'.$key->id_product);?>"
-               onclick="return confirm('Anda yakin?')"> <i class="fa fa-trash"></i> Hapus</a>
+              <button class="btn btn-danger" onclick="deletedata('<?php echo $key->id_product ?>')">
+                <i class="fa fa-trash"></i> Hapus
+              </button>
                 </td>
               </tr>    
 
@@ -215,6 +212,34 @@
        
       <!-- /.modal -->
 
+<script>
+  function deletedata(id)
+  {
+      swal({
+          title: "Are you sure?",
+          text: "Your will not be able to recover this imaginary file!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: false,
+          
+        },
+    function(){
+        $.ajax({
+                  url: "<?php echo base_url('Data_control/delete_product_diesel/')?>" + id,
+                  type: "post",
+                  data: {id:id},
+                  success:function(){
+                      swal("Deleted","Data berhasil dihapus","success");
+                  },
+                  error:function(){
+                      swal("Data gagal dihapus","error");
+                  }
+        });
+      });
 
+  }
+</script>
 
 </div>

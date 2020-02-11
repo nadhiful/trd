@@ -191,7 +191,7 @@ class Admin extends CI_Controller {
                         'isi'       => 'backend/dashboard/product_diesel',
                         'label'     => 'Unit Diesel Manufacture',
                         'label2'    => 'Compose Unit Product',
-                        'konten'    =>  $this->Model_admin->get_all('diesel'),
+                        'konten'    =>  $this->Model_admin->get_data('diesel'),
                         'kategori'  =>  $this->Model_admin->getkodeprodukKategori("diesel"),
                         'th_menu1'  => 'ID Product',
                         'th_menu2'  => 'Nama Unit',
@@ -199,6 +199,25 @@ class Admin extends CI_Controller {
                         'th_menu4'  => 'Gambar',
                         'th_menu5'  => 'Aksi',
                         'id_produk' => $this->Model_admin->getKodeProduk("diesel")
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+
+   function marine_product()
+   {
+        $data = array(
+                        'title'     => 'Sentosa Marine Page',
+                        'isi'       => 'backend/dashboard/product_marine',
+                        'label'     => 'Unit Sentosa Marine',
+                        'label2'    => 'Compose Unit Product',
+                        'konten'    =>  $this->Model_admin->get_data('marine'),
+                        'kategori'  =>  $this->Model_admin->getkodeprodukKategori("marine"),
+                        'th_menu1'  => 'ID Product',
+                        'th_menu2'  => 'Nama Unit',
+                        'th_menu3'  => 'Deskripsi',
+                        'th_menu4'  => 'Gambar',
+                        'th_menu5'  => 'Aksi',
+                        'id_produk' => $this->Model_admin->getKodeProduk("marine")
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }

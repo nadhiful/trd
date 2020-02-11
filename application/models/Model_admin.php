@@ -9,7 +9,7 @@ class Model_admin extends CI_Model {
 		parent::__construct();
 
 	}
-// ============Modul Login=======================//
+// ============Modul Login=========================================//
 	function check_user()
 	{
 		$username = set_value('username');
@@ -24,7 +24,7 @@ class Model_admin extends CI_Model {
 			return array();
 		}
 	}
-//============Modul Get Data All==================//
+//============Modul Get Data All==================================//
 	function get_data($trigger)
 	{
 		if ($trigger=="vision") {
@@ -60,9 +60,20 @@ class Model_admin extends CI_Model {
 			}else{
 				return array();
 			}
+		}elseif($trigger == "marine"){
+			$hasil =  $this->db->select('a.id_product,a.nama,a.deskripsi,b.nama as kategori,a.images')
+							   ->from('product as a')
+							   ->join('kategori_product as b','a.id_kategori = b.id','inner')
+							   ->where('a.id_kategori = 2')
+							   ->get();
+			if ($hasil->num_rows() > 0 ) {
+				return $hasil->result();
+			}else{
+				return array();
+			}
 		}
 	}
-//============Modul Get Data By ID==================//
+//============Modul Get Data By ID================================//
 	function getdataById($trigger)
 	{
 		if ($trigger == 'profile') {
@@ -115,7 +126,7 @@ class Model_admin extends CI_Model {
 				}
 		}
 	}
-//====================Modul Upload Gambar ========================//
+//====================Modul Upload Gambar ================================================//
 	private function _uploadImage($trigger,$id)
 	{
 		if ($trigger == 'profile' AND $id == 0) {
@@ -169,15 +180,16 @@ class Model_admin extends CI_Model {
 	}
 //====================Modul Delete Gambar ========================//
 
-	private function _deleteImage($trigger,$id)
+    private function _deleteImage($id)
 	{
-	    $product = $this->getdataById("product_diesel",$id);
-	    if ($product->images != "default.jpg") {
-		    $filename = explode(".", $product->image)[0];
-			return array_map('unlink', glob(FCPATH."upload/product/$filename.*"));
-	    }
+	    $product = $this->getdataImageID($id);
+
+	    if ($product  != "default.jpg") {
+           $filename = explode(".", $product)[0];
+	       return array_map('unlink', glob(FCPATH."upload/product/$filename.*"));
+	     }
 	}
-//============Modul Update Data ==================//
+//============Modul Update Data =======================================================================//
 
 	function update_data($trigger)
 	{
@@ -266,7 +278,7 @@ class Model_admin extends CI_Model {
 		}
 
 	}
-//=================Modul Get Input From User ========================//
+//=================Modul Get Input From User ==========================================================//
 	private function getdatafromUserInput($trigger)
 	{
 		$var 	= $trigger ;
@@ -472,7 +484,7 @@ class Model_admin extends CI_Model {
 		}
 
 	}
-//=================Modul Get Insert From User ========================//
+//=================Modul Get Insert From User =========================================================//
 	function insert_data($trigger)
 	{
 		$var 	= $trigger ;
@@ -488,16 +500,21 @@ class Model_admin extends CI_Model {
 			}
 		}
 	}
-//=================Modul Get Delete From User ========================//
+//=================Modul Get Delete From User =========================================================//
 	function delete_data($trigger,$id)
 	{
-		if ($trigger == 'product_diesel_d') 
-		{
-			$this->_deleteImage("diesel",$id);
+		if ($trigger == 'product_diesel_d'){
+		   $link = 'Admin/diesel_product';
+		}elseif($trigger == 'product_marine_d'){
+			$link = 'Admin/marine_product';
+		}elseif($trigger == 'product_machine_d'){
+			$link = 'Admin/machine_product';
+		}
+
+			$this->_deleteImage($id);
 			$this->db->where('id_product',$id)
 				 	 ->delete('product');
-			redirect('Admin/diesel_product');
-		}
+			redirect($link,'refresh');
 	}
 
 //=========================Panel Get Kode Produk =====================================================//
@@ -519,6 +536,22 @@ class Model_admin extends CI_Model {
                 $kd = "001";
             }
             return "DS-".$kd;
+       }elseif ($trigger == 'marine' ) {
+       		$q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+            $kd = "";
+            if($q->num_rows()>0)
+            {
+                foreach($q->result() as $k)
+                {
+                    $tmp = ((int)$k->kd_max)+1;
+                    $kd = sprintf("%03s", $tmp);
+                }
+            }
+            else
+            {
+                $kd = "001";
+            }
+            return "SM-".$kd;
        }
     }
 //=========================Panel Get Kode Produk =====================================================//
@@ -534,11 +567,32 @@ class Model_admin extends CI_Model {
                 }else{
                 return array();
              }
+        }elseif($trigger == "marine"){
+        	$hasil   =   $this->db->where('id',2)
+                                 ->from('kategori_product')
+                                 ->get();
+            if($hasil->num_rows() > 0){
+                $des = $hasil->result();
+                return $des;
+                }else{
+                return array();
+             }
         }
     }
 //=========================Panel Get Kode Produk =====================================================//
-
-
+//=========================Panel Get Data Image ID=====================================================//
+    private function getdataImageID($id)
+    {
+    		$hasil = $this->db->select('*')
+    						  ->where('id_product', $id)
+    						  ->from('product')
+    						  ->limit(1)
+    						  ->get();
+    		foreach ($hasil->result() as $key ) {
+    			$images = $key->images;
+    		}
+    		return $images;    	
+    }
 
 
 }
