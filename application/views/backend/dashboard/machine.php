@@ -49,7 +49,9 @@
                   <!-- text input -->
                   <div class="form-group">
                     <label>Feature Image</label>
+                    <a href="<?php echo site_url('Admin/machine_product') ?>">
                     <img src="https://foursite-pape-production.s3.amazonaws.com/agriculture.papemachinery.com/443ce80d-4def-425a-91b9-76173ad7cc85_FIXED_WIDTH_530.jpg" height="300" width="480">
+                    </a>
                   </div>
                 </div>
               </div>

@@ -222,6 +222,25 @@ class Admin extends CI_Controller {
         $this->load->view('layout/backend/wrapper', $data);
    }
 
+   function machine_product()
+   {
+        $data = array(
+                        'title'     => 'Machining Centre Page',
+                        'isi'       => 'backend/dashboard/product_machine',
+                        'label'     => 'Unit Machining Centre',
+                        'label2'    => 'Compose Unit Product',
+                        'konten'    =>  $this->Model_admin->get_data('machine'),
+                        'kategori'  =>  $this->Model_admin->getkodeprodukKategori("machine"),
+                        'th_menu1'  => 'ID Product',
+                        'th_menu2'  => 'Nama Unit',
+                        'th_menu3'  => 'Deskripsi',
+                        'th_menu4'  => 'Gambar',
+                        'th_menu5'  => 'Aksi',
+                        'id_produk' => $this->Model_admin->getKodeProduk("machine")
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+
 }
 
 /* End of file Admin.php */

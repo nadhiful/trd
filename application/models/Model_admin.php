@@ -71,6 +71,17 @@ class Model_admin extends CI_Model {
 			}else{
 				return array();
 			}
+		}elseif($trigger == "machine"){
+			$hasil =  $this->db->select('a.id_product,a.nama,a.deskripsi,b.nama as kategori,a.images')
+							   ->from('product as a')
+							   ->join('kategori_product as b','a.id_kategori = b.id','inner')
+							   ->where('a.id_kategori = 3')
+							   ->get();
+			if ($hasil->num_rows() > 0 ) {
+				return $hasil->result();
+			}else{
+				return array();
+			}
 		}
 	}
 //============Modul Get Data By ID================================//
@@ -160,6 +171,10 @@ class Model_admin extends CI_Model {
 		}elseif ($trigger == 'marine_produk' && $id == 0) {
 			$index 						= $this->getKodeProduk("marine");
 			$name 						= 'marine_produk_'.$index."_";
+			$folder 					= './upload/product/';
+		}elseif ($trigger == 'machine_produk' && $id == 0) {
+			$index 						= $this->getKodeProduk("machine");
+			$name 						= 'machine_produk_'.$index."_";
 			$folder 					= './upload/product/';
 		}
 
@@ -523,6 +538,12 @@ class Model_admin extends CI_Model {
 				$this->db->insert('product', $var);
 				redirect('Admin/marine_product');
 			}
+		}elseif ($awal == 'product' && $tengah == 'machine') {
+			if ($akhir == "a") {
+				$var = $this->getdatafromUserInput("product-machine_a");
+				$this->db->insert('product', $var);
+				redirect('Admin/machine_product');
+			}
 		}
 	}
 
@@ -561,6 +582,22 @@ class Model_admin extends CI_Model {
                 $kd = "001";
             }
             return "SM-".$kd;
+       }elseif ($trigger == 'machine' ) {
+       		$q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+            $kd = "";
+            if($q->num_rows()>0)
+            {
+                foreach($q->result() as $k)
+                {
+                    $tmp = ((int)$k->kd_max)+1;
+                    $kd = sprintf("%03s", $tmp);
+                }
+            }
+            else
+            {
+                $kd = "001";
+            }
+            return "MC-".$kd;
        }
     }
 //=========================Panel Get Kode Produk =====================================================//
@@ -578,6 +615,16 @@ class Model_admin extends CI_Model {
              }
         }elseif($trigger == "marine"){
         	$hasil   =   $this->db->where('id',2)
+                                 ->from('kategori_product')
+                                 ->get();
+            if($hasil->num_rows() > 0){
+                $des = $hasil->result();
+                return $des;
+                }else{
+                return array();
+             }
+        }elseif($trigger == "machine"){
+        	$hasil   =   $this->db->where('id',3)
                                  ->from('kategori_product')
                                  ->get();
             if($hasil->num_rows() > 0){
