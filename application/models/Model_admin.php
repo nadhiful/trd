@@ -157,6 +157,10 @@ class Model_admin extends CI_Model {
 			$index 						= $this->getKodeProduk("diesel");
 			$name 						= 'diesel_produk_'.$index."_";
 			$folder 					= './upload/product/';
+		}elseif ($trigger == 'marine_produk' && $id == 0) {
+			$index 						= $this->getKodeProduk("marine");
+			$name 						= 'marine_produk_'.$index."_";
+			$folder 					= './upload/product/';
 		}
 
 		$dateString 					= date('Y-m-d');
@@ -481,6 +485,21 @@ class Model_admin extends CI_Model {
 			        return $data;
 			        return TRUE;
 			}
+		}elseif ($awal == "product-marine") {
+			if ($index == 'a') {
+				$id = 0;
+				$data=array(
+			            'id_product'	=> $this->getKodeProduk("marine"),
+			            'id_kategori'	=> 2,
+			            'nama'			=> $this->input->post('nama'),
+			            'deskripsi'		=> $this->input->post('isi'),
+			            'images'		=> $this->_uploadImage('marine_produk',$id),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			        return $data;
+			        return TRUE;
+			}
 		}
 
 	}
@@ -498,23 +517,13 @@ class Model_admin extends CI_Model {
 				$this->db->insert('product', $var);
 				redirect('Admin/diesel_product');
 			}
+		}elseif ($awal == 'product' && $tengah == 'marine') {
+			if ($akhir == "a") {
+				$var = $this->getdatafromUserInput("product-marine_a");
+				$this->db->insert('product', $var);
+				redirect('Admin/marine_product');
+			}
 		}
-	}
-//=================Modul Get Delete From User =========================================================//
-	function delete_data($trigger,$id)
-	{
-		if ($trigger == 'product_diesel_d'){
-		   $link = 'Admin/diesel_product';
-		}elseif($trigger == 'product_marine_d'){
-			$link = 'Admin/marine_product';
-		}elseif($trigger == 'product_machine_d'){
-			$link = 'Admin/machine_product';
-		}
-
-			$this->_deleteImage($id);
-			$this->db->where('id_product',$id)
-				 	 ->delete('product');
-			redirect($link,'refresh');
 	}
 
 //=========================Panel Get Kode Produk =====================================================//
@@ -593,6 +602,22 @@ class Model_admin extends CI_Model {
     		}
     		return $images;    	
     }
+//=================Modul Get Delete From User =========================================================//
+	function delete_data($trigger,$id)
+	{
+		if ($trigger == 'product_diesel_d'){
+		   $link = 'Admin/diesel_product';
+		}elseif($trigger == 'product_marine_d'){
+			$link = 'Admin/marine_product';
+		}elseif($trigger == 'product_machine_d'){
+			$link = 'Admin/machine_product';
+		}
+
+			$this->_deleteImage($id);
+			$this->db->where('id_product',$id)
+				 	 ->delete('product');
+			redirect($link,'refresh');
+	}
 
 
 }

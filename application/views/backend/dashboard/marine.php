@@ -49,7 +49,9 @@
                   <!-- text input -->
                   <div class="form-group">
                     <label>Feature Image</label>
+                    <a href="<?php echo site_url('Admin/marine_product') ?>">
                     <img src="https://images.wsj.net/im-74295?width=620&size=1.5" height="300" width="480">
+                    </a>
                   </div>
                 </div>
               </div>
