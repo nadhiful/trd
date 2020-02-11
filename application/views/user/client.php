@@ -102,49 +102,47 @@
 				</div>
 				<div class="col-lg-8 order-1 order-lg-2" >
 					<div class="blog-post tab-pane fade show active" id="profil" role="tabpanel" >
-						<div class="blog" >
-						</div>
 						<h2 style="color: #DAA520;">Klien Kami</h2>
-						<p>Kami melayani dengan selalu mendengar dan memberikan solusi yang tepat, tentang apa yang dibutuhkan konsumen, sehingga produk yang didapatkan konsumen memang benar-benar sesuai kebutuhan, selain itu kami terus berusaha apa yang kami lakukan mampu memberikan dampak untuk perkembangan perusahaan atau bisnis tersebut, berikut beberapa klien yang sudah bekerja sama dalam menggunakan produk-produk kami</p>
+						<p>Kami melayani dengan selalu mendengar dan memberikan solusi yang tepat, tentang apa yang dibutuhkan konsumen, sehingga produk yang didapatkan konsumen memang benar-benar sesuai kebutuhan, selain itu kami terus berusaha apa yang kami lakukan mampu memberikan dampak untuk perkembangan perusahaan atau bisnis tersebut, berikut beberapa klien yang sudah bekerja sama dalam menggunakan produk-produk kami</p><br>
 						<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="feature-box">
-						<img src="<?php site_url();?>../assets/user/img/clients/a.png" alt="" height="100px" width="150px"><br>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="feature-box">
-						<img src="<?php site_url();?>../assets/user/img/clients/b.png" alt="" height="100px" width="150px"><br>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-12">
-					<div class="feature-box">
-						<img src="<?php site_url();?>../assets/user/img/clients/c.png" alt="" height="100px" width="150px"><br>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-12">
-					<div class="feature-box">
-						<img src="<?php site_url();?>../assets/user/img/clients/d.png" alt="" height="100px" width="150px"><br>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-12">
-					<div class="feature-box">
-						<img src="<?php site_url();?>../assets/user/img/clients/e.png" alt="" height="100px" width="150px"><br>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-12">
-					<div class="feature-box">
-						<img src="<?php site_url();?>../assets/user/img/clients/f.png" alt="" height="100px" width="150px"><br>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-12">
-					<div class="feature-box">
-						<img src="<?php site_url();?>../assets/user/img/clients/g.png" alt="" height="100px" width="150px"><br>
-					</div>
-				</div>
-			</div>
-		</div>
+						<div class="row">
+							<div class="col-lg-4 col-md-6">
+								<div class="feature-box">
+									<img src="<?php site_url();?>../assets/user/img/clients/a.png" alt="" height="100px" width="150px"><br>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-6">
+								<div class="feature-box">
+									<img src="<?php site_url();?>../assets/user/img/clients/b.png" alt="" height="100px" width="150px"><br>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-12">
+								<div class="feature-box">
+									<img src="<?php site_url();?>../assets/user/img/clients/c.png" alt="" height="100px" width="150px"><br>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-12">
+								<div class="feature-box">
+									<img src="<?php site_url();?>../assets/user/img/clients/d.png" alt="" height="100px" width="150px"><br>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-12">
+								<div class="feature-box">
+									<img src="<?php site_url();?>../assets/user/img/clients/e.png" alt="" height="100px" width="150px"><br>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-12">
+								<div class="feature-box">
+									<img src="<?php site_url();?>../assets/user/img/clients/f.png" alt="" height="100px" width="150px"><br>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-12">
+								<div class="feature-box">
+									<img src="<?php site_url();?>../assets/user/img/clients/g.png" alt="" height="100px" width="150px"><br>
+								</div>
+							</div>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>

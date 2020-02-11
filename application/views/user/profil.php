@@ -101,15 +101,14 @@
 					</div>
 				</div>
 				<div class="col-lg-8 order-1 order-lg-2" >
+					<form action="<?php echo site_url();?>Home/profil">
 					<div class="blog-post tab-pane fade show active" id="profil" role="tabpanel" >
-						<div class="blog-thumb set-bg" data-setbg="<?php site_url();?>../assets/user/img/blog/1.jpg">
+						<div class="blog-thumb set-bg" data-setbg="../../../../tri_ratna_diesel/upload/profile/<?php echo $profil->images;?>">
 						</div>
-						<h2 style="color: #DAA520;">Profil Perusahaan</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi</p>
+						<h2 style="color: #DAA520;"><?php echo $profil->judul; ?></h2>
+						<p><?php echo $profil->isi; ?></p>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>

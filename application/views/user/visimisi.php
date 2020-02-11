@@ -95,7 +95,7 @@
 						<ul>
 							<li><a href="<?php site_url();?>../Home/profil">Profil Perusahaan</a></li>
 							<li><a href="<?php site_url();?>">Visi Misi</a></li>
-							<li><a href="<?php site_url();?>../Home/corevalue">Company Value></li>
+							<li><a href="<?php site_url();?>../Home/corevalue">Company Value</a></li>
 							<li><a href="<?php site_url();?>../Home/client">Our Client</a></li>
 						</ul>
 					</div>
@@ -116,7 +116,7 @@
 								</div>
 								<div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 									<div class="panel-body">
-										<p>Menjadi Perusahaan Visioner terintegrasi serta terkemuka dan siap menjadi produk kebanggan Indonesia untuk berkompetisi di dunia bisnis Internasional.</p>
+										<p><?php echo $visi->isi; ?></p>
 									</div>
 								</div>
 							</div>
@@ -126,10 +126,7 @@
 								</div>
 								<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 									<div class="panel-body">
-										<p>- Mengembangkan industri manufaktur mesin diesel dengan kualitas terbaik dan mampu merajai pasar Indonesia bagian Timur dalam tempo yang singkat serta menguasai pasar Indonesia secara keseluruhan dalam beberapa tahun mendatang.
-											- Menjadi jasa pusat permesinan yang memberikan kualitas pelayanan terbaik  dengan standar kerja yang cepat dan presisi yang tepat hingga menjadi pilihan utama bagi pelanggan 
-											- Memproduksi dan mereparasi kapal berbahan alumunium dan baja dalam berbagai jenis serta menguasai industri galangan kapal di sektor maritim dan mampu memberikan kepuasan bagi semua pihak. 
-</p>
+										<p><?php echo $misi->isi; ?></p>
 									</div>
 								</div>
 							</div>

@@ -92,14 +92,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<img src="<?php site_url();?>../assets/user/img/fg.jpg" alt="" width="90%" height="90%">
+					<img src="./../../../tri_ratna_diesel/upload/profile/<?php echo $dem->images; ?>" alt="" width="90%" height="90%">
 				</div>
 				<div class="col-lg-6">
 					<div class="about-text">
-						<h2  style="color:#000066;">Diesel Engine Manufacture (DEM)</h2>
-						<p>PT Tri Ratna Diesel Indonesia perusahaan yang bergerak dibidang manufaktur dan telah memproduksi motor diesel sendiri dengan merek "Diamond" Diesel Engine dan juga pelapor motor diesel dalam negeri.
-
-						Sebagai sarana kebutuhan para penggerak usaha dibidang pertanian, perkebunan, dan kelautan dalam skala kecil maupun besar.</p>
+						<h2  style="color:#000066;"><?php echo $dem->judul; ?></h2>
+						<p><?php echo $dem->isi; ?></p>
 					</div>
 				</div>
 			</div>
@@ -114,60 +112,17 @@
 				<h2 style="color:#000066;">Produk Diesel Engine</h2>
 			</div>
 			<div class="row">
+				<?php foreach ($pdem as $key) { ?>
 				<div class="col-md-4">
 					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/DCH-9270 EDIT3.png" alt="" width="50%" height="50%">
+						<img src="../../../../tri_ratna_diesel/upload/product/<?php echo $key["images"]?>" width=250px" height="200px">
 						<div class="member-info">
-							<h3>Mesin DCH-9270</h3>
-							<p>Dilengkapi dengan lampu sebagai sarana penerangan</p>
+							<h3><?php echo $key["nama"] ?></h3>
+							<p><?php echo $key["deskripsi"] ?></p>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/Mesin DI 1100 L - Orange.png" alt="" width="70%" height="70%">
-						<div class="member-info">
-							<h3>Mesin DI 1100 L - Orange</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Hopper</i> serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/Mesin DI 1100 H - Blue4.png" alt="" width="41%" height="41%">
-						<div class="member-info">
-							<h3>Mesin DI 1100 H - Blue</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Condensor </i>serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/CIMG4647_.png" alt="" width="50%" height="50%">
-						<div class="member-info">
-							<h3>Mesin TP 1000</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Condensor </i>serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/SAM_1791.png" alt="" width="50%" height="50%">
-						<div class="member-info">
-							<h3>Transplanter Indo Jarwo</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Condensor </i>serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/Mesin DI 800 L - Orange.png" alt="" width="52%" height="52%">
-						<div class="member-info">
-							<h3>Mesin DI 800 L - Orange</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Condensor </i>serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</section>

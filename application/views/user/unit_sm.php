@@ -99,12 +99,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<img src="<?php site_url();?>../assets/user/img/sm.jpg" alt="" width="90%" height="90%">
+					<img src="./../../../tri_ratna_diesel/upload/profile/<?php echo $sm->images; ?>" alt="" width="90%" height="90%">
 				</div>
 				<div class="col-lg-6">
 					<div class="about-text">
-						<h2 style="color:#000066;">Shipyard</h2>
-						<p>Divisi pembuatan kapal merupakan bagian utama dari operasi PT Tri Ratna Diesel. PT Tri Ratna Diesel memberikan beberapa pelayanan berupa Custom Design, Aftersales Service, ketersediaannya suku cadang (Spare Part Ready), dan Maintenance Fast Response. </p>
+						<h2 style="color:#000066;"><?php echo $sm->judul; ?></h2>
+						<p><?php echo $sm->isi; ?></p>
 					</div>
 				</div>
 			</div>
@@ -119,33 +119,17 @@
 				<h2 style="color:#000066;">Produk Shipyard</h2>
 			</div>
 			<div class="row">
+				<?php foreach ($psm as $key) { ?>
 				<div class="col-md-4">
 					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/sm22.png" alt="" width="90%" height="100%">
+						<img src="./../../../tri_ratna_diesel/upload/product/<?php echo $key['images']; ?>" alt="" width="250px" height="200px">
 						<div class="member-info">
-							<h3>"L" Series</h3>
-							<p>Dilengkapi dengan lampu sebagai sarana penerangan</p>
+							<h3><?php echo $key['nama']?></h3>
+							<p><?PHP echo $key['deskripsi']?></p>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/bms 174.png" alt="" width="80%" height="100%">
-						<div class="member-info">
-							<h3>"HE" Series</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Hopper</i> serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="team-member" align="Center">
-						<img src="<?php site_url();?>../assets/user/img/KPLP KELAS V2.png" alt="" width="80%" height="100%">
-						<div class="member-info">
-							<h3>"HM" Series</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Condensor </i>serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</section>
