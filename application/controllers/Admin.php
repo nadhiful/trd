@@ -142,6 +142,7 @@ class Admin extends CI_Controller {
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
+
      function marine()
    {
         $data = array(
@@ -151,12 +152,53 @@ class Admin extends CI_Controller {
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }
+     function add_marine()
+   {
+        $data = array(
+                        'title'     => 'Sentosa Marine Page',
+                        'isi'       => 'backend/dashboard/add_marine',
+                        'label'     => 'Sentosa Marine',
+                        'data'      => $this->Model_admin->getdataById('marine_profile')
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+
      function machine()
    {
         $data = array(
                         'title'     => 'Machining Centre Page',
                         'isi'       => 'backend/dashboard/machine',
                         'label'     => 'Machining Centre',
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+
+   function add_machine()
+   {
+        $data = array(
+                        'title'     => 'Machining Centre Page',
+                        'isi'       => 'backend/dashboard/add_machine',
+                        'label'     => 'Machining Centre',
+                        'data'      => $this->Model_admin->getdataById('machine_profile')
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+//=====================Panel Untuk Routing Unit Product===============================================//
+   function diesel_product()
+   {
+        $data = array(
+                        'title'     => 'Diesel Manufacture Page',
+                        'isi'       => 'backend/dashboard/product_diesel',
+                        'label'     => 'Unit Diesel Manufacture',
+                        'label2'    => 'Compose Unit Product',
+                        'konten'    =>  $this->Model_admin->get_all('diesel'),
+                        'kategori'  =>  $this->Model_admin->getkodeprodukKategori("diesel"),
+                        'th_menu1'  => 'ID Product',
+                        'th_menu2'  => 'Nama Unit',
+                        'th_menu3'  => 'Deskripsi',
+                        'th_menu4'  => 'Gambar',
+                        'th_menu5'  => 'Aksi',
+                        'id_produk' => $this->Model_admin->getKodeProduk("diesel")
                     );
         $this->load->view('layout/backend/wrapper', $data);
    }

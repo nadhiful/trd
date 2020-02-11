@@ -1,3 +1,6 @@
+<?php 
+  if (isset($data)) {
+    foreach ($data as $key) { ?>    
 <!-- Main content -->
 <section class="content">
   <div class="row">
@@ -30,7 +33,10 @@
                     <div class="form-group">
                       <label>Feature Image</label>
                       <br>
-                      
+                       <?php 
+                      $product_image = ['src'   => 'upload/profile/' . $key->images, 'height'   => '320']; 
+                      echo img($product_image);
+                      ?>
                     </div>
                   </div>
                 </div>
@@ -39,7 +45,7 @@
                     <!-- text input -->
                     <div class="form-group">
                       <label>Headline</label>
-                      <input name="judul" type="text" class="form-control" value="" readonly>
+                      <input name="judul" type="text" class="form-control" value="<?php echo $key->judul ?>" readonly>
                     </div>
                   </div>
                 </div>
@@ -48,9 +54,7 @@
                     <!-- textarea -->
                     <div class="form-group">
                       <label>Content</label>
-                      <textarea name="isi" class="form-control" rows="6" readonly>
-                      
-                      </textarea>
+                      <textarea name="isi" class="form-control" rows="6" readonly><?php echo $key->isi?></textarea>
                     </div>
                   </div>
                 </div>
@@ -63,7 +67,7 @@
               </div>
               <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
-                  <?php echo form_open_multipart('Data_control/add_diesel_profile');?>
+                  <?php echo form_open_multipart('Data_control/update_diesel_profile');?>
                   <div class="modal-content">
                     <div class="modal-header">
                       <h4 class="modal-title">Compose Profile</h4>
@@ -75,18 +79,19 @@
                       <div class="form-group">
                         <label class="control-label">Judul</label>
                         <div class="col-sm-12">
-                         <input type="text" name="judul" class="form-control">
+                         <input type="text" name="judul" class="form-control" value="<?php echo $key->judul; ?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label">Isi</label>
                         <div class="col-sm-12">
-                           <textarea name="isi" class="form-control" rows="6"></textarea>
+                           <textarea name="isi" class="form-control" rows="6"><?php echo $key->isi;?></textarea>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label">Feature Image</label>
                         <div class="col-sm-12">
+                           <input type="hidden" name="old_images" value="<?php echo $key->images;?>">
                            <input type="file" name="images">
                         </div>
                       </div>
@@ -111,5 +116,8 @@
   </div>
   <!-- ./row -->
 </section>
+<?php }
+  }
+?>
 <!-- /.content -->
 </div>

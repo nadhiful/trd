@@ -8,7 +8,7 @@
       <div class="card card-outline card-info">
         <div class="card-header">
           <h3 class="card-title">
-          Compose Profile
+          Compose Unit Profile
           </h3>
           <!-- tools box -->
           <div class="card-tools">
@@ -33,7 +33,7 @@
                     <div class="form-group">
                       <label>Feature Image</label>
                       <br>
-                      <?php 
+                       <?php 
                       $product_image = ['src'   => 'upload/profile/' . $key->images, 'height'   => '320']; 
                       echo img($product_image);
                       ?>
@@ -45,7 +45,7 @@
                     <!-- text input -->
                     <div class="form-group">
                       <label>Headline</label>
-                      <input name="judul" type="text" class="form-control" value="<?php echo $key->judul; ?>" readonly>
+                      <input name="judul" type="text" class="form-control"readonly value="<?php echo $key->judul?>">
                     </div>
                   </div>
                 </div>
@@ -54,21 +54,20 @@
                     <!-- textarea -->
                     <div class="form-group">
                       <label>Content</label>
-                      <textarea name="isi" class="form-control" rows="6" readonly><?php echo $key->isi;?>
-                      </textarea>
+                      <textarea name="isi" class="form-control" rows="6" readonly><?php echo $key->isi?></textarea>
                     </div>
                   </div>
                 </div>
                 <div class="card-footer">
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-                  Edit Profile
+                  Add Profile
                   </button>
                 </div>
                 <!-- input states -->
               </div>
               <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
-                  <?php echo form_open_multipart('Data_control/update_profile');?>
+                  <?php echo form_open_multipart('Data_control/update_marine_profile');?>
                   <div class="modal-content">
                     <div class="modal-header">
                       <h4 class="modal-title">Compose Profile</h4>
@@ -80,13 +79,13 @@
                       <div class="form-group">
                         <label class="control-label">Judul</label>
                         <div class="col-sm-12">
-                         <input type="text" name="judul" class="form-control" value="<?php echo $key->judul ?>">
+                         <input type="text" name="judul" class="form-control" value="<?php echo $key->judul; ?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label">Isi</label>
                         <div class="col-sm-12">
-                           <textarea name="isi" class="form-control" rows="6"><?php echo $key->isi?></textarea>
+                           <textarea name="isi" class="form-control" rows="6"><?php echo $key->isi;?></textarea>
                         </div>
                       </div>
                       <div class="form-group">
@@ -117,9 +116,9 @@
   </div>
   <!-- ./row -->
 </section>
-<!-- /.content -->
-<?php }
+   <?php }
   }
+?>
 
- ?>
+<!-- /.content -->
 </div>

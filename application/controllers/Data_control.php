@@ -63,6 +63,40 @@ class Data_control extends CI_Controller {
         $this->Model_admin->update_data("diesel_a");
 
     }
+       function update_diesel_profile()
+    {
+        $this->Model_admin->update_data("diesel_u");
+
+    }
+        function add_marine_profile()
+    {
+        $this->Model_admin->update_data("marine_a");
+
+    }
+       function update_marine_profile()
+    {
+        $this->Model_admin->update_data("marine_u");
+
+    }
+        function add_machine_profile()
+    {
+        $this->Model_admin->update_data("machine_a");
+
+    }
+       function update_machine_profile()
+    {
+        $this->Model_admin->update_data("machine_u");
+
+    } function add_product_diesel()
+
+    {
+        $this->Model_admin->insert_data("product_diesel_a");
+    }
+      function delete_product($id)
+    {
+        $this->Model_admin->delete_data("product_diesel_d",$id);
+    }
+
 }
 
 /* End of file Data_control */
