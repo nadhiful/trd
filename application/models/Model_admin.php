@@ -562,34 +562,110 @@ class Model_admin extends CI_Model {
 		}
 	}
 
-//=========================Panel Get Kode Produk =====================================================//
+//=========================Panel Get Kode Produk =======================================//
    function getKodeProduk($trigger)
     {
-    	//Jika ada data
-       $hasil = $this->db->select('id_product')
-       				  	 ->from('product')
-       				  	 ->order_by('id_product','DESC')
-       				  	 ->limit(1)
-       				  	 ->get();
-       	if ($hasil->num_rows() > 0) {
-       		foreach ($hasil->result() as $key) {
-       			$string = $key->id_product;
-       		}
-       		$pecah = explode('-',$string);
-       		$kode  = $pecah[0];
-       		$nomor = $pecah[1];
-       		if ($trigger == "diesel") {
-       			$kode;
-       		}
+    	$resultan = $this->db->select('*')
+    						 ->from('product')
+    						 ->get();
+    	if ($resultan->num_rows() > 0) {
+    		
+	       $kd = "";
+	       $hasil = $this->db->select('id_product')
+	                         ->from('product')
+	                         ->order_by('id_product','DESC')
+	                         ->limit(1)
+	                         ->get();
+	              foreach ($hasil->result() as $key ) {
+	              $result1 = $key->id_product;
+	        }
+	//===========================================================================//
+	       $hasil3 = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product where id_product LIKE '%DS%' ");
+	       foreach ($hasil3->result() as $key3) {
+	                     $tmp3 = ((int)$key3->kd_max)+1;
+	            $kd3 = sprintf("%03s", $tmp3);
+	       }
 
+	       $hasil4 = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product where id_product LIKE '%SM%' ");
+	       foreach ($hasil4->result() as $key4) {
+	                     $tmp4 = ((int)$key4->kd_max)+1;
+	            $kd4 = sprintf("%03s", $tmp4);
+	       }
 
-       		var_dump($nomor);
+	       $hasil5 = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product where id_product LIKE '%MC%' ");
+	       foreach ($hasil5->result() as $key5) {
+	                     $tmp5 = ((int)$key5->kd_max)+1;
+	            $kd5 = sprintf("%03s", $tmp5);
+	       }
+	//===========================================================================//
+	       $string = explode('-', $result1);
+	       $pecah1 = $string[0];
+	       $pecah2 = $string[1];
+	       if ($trigger == "diesel" && $pecah1 =="DS") {
+	                     return "DS-".$kd3;
+	       }elseif ($trigger == "diesel" && $pecah1 != "DS") {
+	                     return "DS-".$kd3;
+	       }elseif($trigger == "marine" && $pecah1 =="SM") {
+	                     return "SM-".$kd4;
+	       }elseif ($trigger == "marine" && $pecah1 != "SM") {
+	                     return "SM-".$kd4;
+	       }elseif($trigger == "machine" && $pecah1 =="MC") {
+	                     return "MC-".$kd5;
+	       }elseif ($trigger == "machine" && $pecah1 != "MC") {
+	                     return "MC-".$kd5;
+	       }
+       }else{
 
-       	}else{
-       		//Jika data kosong	
-       	}
-
-        
+	       if ($trigger == 'diesel') {
+	            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+	            
+	            if($q->num_rows()>0)
+	            {
+	                foreach($q->result() as $k)
+	                {
+	                    $tmp = ((int)$k->kd_max)+1;
+	                    $kd = sprintf("%03s", $tmp);
+	                }
+	            }
+	            else
+	            {
+	                $kd = "001";
+	            }
+	            return "DS-".$kd;
+	       }elseif ($trigger == 'marine' ) {
+	            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+	            $kd = "";
+	            if($q->num_rows()>0)
+	            {
+	                foreach($q->result() as $k)
+	                {
+	                    $tmp = ((int)$k->kd_max)+1;
+	                    $kd = sprintf("%03s", $tmp);
+	                }
+	            }
+	            else
+	            {
+	                $kd = "001";
+	            }
+	            return "SM-".$kd;
+	       }elseif ($trigger == 'machine' ) {
+	            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+	            $kd = "";
+	            if($q->num_rows()>0)
+	            {
+	                foreach($q->result() as $k)
+	                {
+	                    $tmp = ((int)$k->kd_max)+1;
+	                    $kd = sprintf("%03s", $tmp);
+	                }
+	            }
+	            else
+	            {
+	                $kd = "001";
+	            }
+	            return "MC-".$kd;
+	       		}
+	    }
 
     }
 //=========================Panel Get Kode Produk =====================================================//
@@ -657,7 +733,6 @@ class Model_admin extends CI_Model {
 				 	 ->delete('product');
 			redirect($link,'refresh');
 	}
-
 
 }
 
