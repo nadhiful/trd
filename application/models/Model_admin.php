@@ -82,6 +82,15 @@ class Model_admin extends CI_Model {
 			}else{
 				return array();
 			}
+		}elseif ($trigger == "karir") {
+			$hasil = $this->db->select('*')
+							  ->from('karir')
+							  ->get();
+			if ($hasil->num_rows() > 0 ) {
+				return $hasil->result();
+			}else{
+				return array();
+			}
 		}
 	}
 //============Modul Get Data By ID================================//
