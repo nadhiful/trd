@@ -515,6 +515,21 @@ class Model_admin extends CI_Model {
 			        return $data;
 			        return TRUE;
 			}
+		}elseif ($awal == "product-machine") {
+			if ($index == 'a') {
+				$id = 0;
+				$data=array(
+			            'id_product'	=> $this->getKodeProduk("machine"),
+			            'id_kategori'	=> 3,
+			            'nama'			=> $this->input->post('nama'),
+			            'deskripsi'		=> $this->input->post('isi'),
+			            'images'		=> $this->_uploadImage('machine_produk',$id),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			        return $data;
+			        return TRUE;
+			}
 		}
 
 	}
@@ -550,55 +565,32 @@ class Model_admin extends CI_Model {
 //=========================Panel Get Kode Produk =====================================================//
    function getKodeProduk($trigger)
     {
-       if ($trigger == 'diesel') {
-            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
-            $kd = "";
-            if($q->num_rows()>0)
-            {
-                foreach($q->result() as $k)
-                {
-                    $tmp = ((int)$k->kd_max)+1;
-                    $kd = sprintf("%03s", $tmp);
-                }
-            }
-            else
-            {
-                $kd = "001";
-            }
-            return "DS-".$kd;
-       }elseif ($trigger == 'marine' ) {
-       		$q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
-            $kd = "";
-            if($q->num_rows()>0)
-            {
-                foreach($q->result() as $k)
-                {
-                    $tmp = ((int)$k->kd_max)+1;
-                    $kd = sprintf("%03s", $tmp);
-                }
-            }
-            else
-            {
-                $kd = "001";
-            }
-            return "SM-".$kd;
-       }elseif ($trigger == 'machine' ) {
-       		$q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
-            $kd = "";
-            if($q->num_rows()>0)
-            {
-                foreach($q->result() as $k)
-                {
-                    $tmp = ((int)$k->kd_max)+1;
-                    $kd = sprintf("%03s", $tmp);
-                }
-            }
-            else
-            {
-                $kd = "001";
-            }
-            return "MC-".$kd;
-       }
+    	//Jika ada data
+       $hasil = $this->db->select('id_product')
+       				  	 ->from('product')
+       				  	 ->order_by('id_product','DESC')
+       				  	 ->limit(1)
+       				  	 ->get();
+       	if ($hasil->num_rows() > 0) {
+       		foreach ($hasil->result() as $key) {
+       			$string = $key->id_product;
+       		}
+       		$pecah = explode('-',$string);
+       		$kode  = $pecah[0];
+       		$nomor = $pecah[1];
+       		if ($trigger == "diesel") {
+       			$kode;
+       		}
+
+
+       		var_dump($nomor);
+
+       	}else{
+       		//Jika data kosong	
+       	}
+
+        
+
     }
 //=========================Panel Get Kode Produk =====================================================//
    function getkodeprodukKategori($trigger)
