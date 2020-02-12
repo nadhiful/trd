@@ -241,6 +241,44 @@ class Admin extends CI_Controller {
         $this->load->view('layout/backend/wrapper', $data);
    }
 
+   function career()
+   {
+        $data = array(
+                        'title'     => 'Career Dashboard',
+                        'isi'       => 'backend/dashboard/career',
+                        'label'     => 'Career Page',
+                        'label2'    => 'Compose Career Post',
+                        'konten'    =>  $this->Model_admin->get_data('karir'),
+                        'th_menu1'  => 'ID Post',
+                        'th_menu2'  => 'Kategori',
+                        'th_menu3'  => 'Position',
+                        'th_menu4'  => 'Tanggal Penutupan',
+                        'th_menu5'  => 'Aksi',
+                        'th_menu6'  => 'Deskripsi',
+                        'th_menu7'  => 'Lokasi'
+                       
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+
+    function event()
+   {
+        $data = array(
+                        'title'     => 'Event Dashboard',
+                        'isi'       => 'backend/dashboard/event',
+                        'label'     => 'Event Page',
+                        'label2'    => 'Compose Event Post',
+                        'konten'    =>  $this->Model_admin->get_data('event'),
+                        'th_menu1'  => 'ID Post',
+                        'th_menu2'  => 'Judul',
+                        'th_menu3'  => 'Deskripsi',
+                        'th_menu4'  => 'Gambar',
+                        'th_menu5'  => 'Aksi',
+                       
+                    );
+        $this->load->view('layout/backend/wrapper', $data);
+   }
+
 }
 
 /* End of file Admin.php */
