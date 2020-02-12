@@ -113,24 +113,34 @@
 								<p>Kabupaten Gresik 23589</p>
 							</div>
 						</div>
+						<div class="header-info-box">
+							<div class="hib-icon">
+								<img src="<?php site_url();?>../assets/user/img/icons/pollution.png" alt="" class="" height="70%" width="70%">
+							</div>
+							<div class="hib-text">
+								<h6>Galangan Kapal (Shipyard)</h6>
+								<p>Dusun Genting Timur, Tanggul Paciran, Lamongan, Jawa Timur</p>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-4"></div>
 				<div class="col-lg-4">
-					<form class="contact-form">
+					<?php echo validation_errors(); ?>
+					<form class="contact-form" method="post" action="<?php echo site_url(); ?>Home/add">
 						<div class="row">
 							<div class="col-lg-6">
-								<input type="text" placeholder="Your Name">
+								<input type="text" placeholder="Your Name" name="input_name" >
 							</div>
 							<div class="col-lg-6">
-								<input type="text" placeholder="Your Email">
+								<input type="text" placeholder="Your Email" name="input_email">
 							</div>
 							<div class="col-lg-4">
 							</div>
 							<div class="col-lg-12">
-								<input type="text" placeholder="Subject">
-								<textarea class="text-msg" placeholder="Message"></textarea>
-								<button class="site-btn" type="submit">send message</button>
+								<input type="text" placeholder="Subject" name="input_subject">
+								<textarea class="text-msg" placeholder="Message" name="input_message"></textarea>
+								<button class="site-btn" type="submit" name="submit">send message</button>
 							</div>
 						</div>
 					</form>

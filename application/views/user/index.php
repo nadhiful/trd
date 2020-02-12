@@ -73,13 +73,19 @@
 	<!-- Hero section  -->
 	<section class="hero-section">
 		<div class="hero-slider owl-carousel">
-			<div class="hero-item set-bg" data-setbg="<?php site_url();?>assets/user/img/hero-slider/1.jpg">
+			<div class="hero-item set-bg" data-setbg="<?php site_url();?>assets/user/img/file.jpg">
 				<div class="container">
 					<div class="row">
 					</div>
 				</div>
 			</div>
-			<div class="hero-item set-bg" data-setbg="<?php site_url();?>assets/user/img/hero-slider/2.jpg">
+			<div class="hero-item set-bg" data-setbg="<?php site_url();?>assets/user/img/12.jpg">
+				<div class="container">
+					<div class="row">
+					</div>
+				</div>
+			</div>
+			<div class="hero-item set-bg" data-setbg="<?php site_url();?>assets/user/img/13.jpg">
 				<div class="container">
 					<div class="row">
 					</div>
@@ -153,7 +159,7 @@
 	<!-- Services section end  -->
 
 	<!-- Section Welcome -->
-		<section class="team-section spad">
+	<section class="team-section spad">
 		<div class="container">
 			<div class="team-text">
 				<h2  style="color:#FFD700;">PT Tri Ratna Diesel Indonesia</h2>
@@ -166,31 +172,13 @@
 	<section class="clients-section spad">
 		<div class="container">
 			<div id="client-carousel" class="client-slider owl-carousel">
+				<?php foreach ($index as $key) { ?>
 				<div>
 					<a href="#">
-						<img src="<?php site_url();?>assets/user/img/clients/a.png" alt="" height="70px" width="100px">
+						<img src="../../../../tri-ratna-diesel/upload/clients/<?php echo $key['images'];?>" alt="" height="70px" width="100px">
 					</a>
 				</div>
-				<div>
-					<a href="#">
-						<img src="<?php site_url();?>assets/user/img/clients/b.png" alt="" height="70px" width="100px">
-					</a>
-				</div>
-				<div>
-					<a href="#">
-						<img src="<?php site_url();?>assets/user/img/clients/c.png" alt="" height="70px" width="100px">
-					</a>
-				</div>
-				<div>
-					<a href="#">
-						<img src="<?php site_url();?>assets/user/img/clients/d.png" alt="" height="70px" width="100px">
-					</a>
-				</div>
-				<div>
-					<a href="#">
-						<img src="<?php site_url();?>assets/user/img/clients/e.png" alt="" height="70px" width="100px">
-					</a>
-				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</section>

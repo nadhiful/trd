@@ -104,41 +104,42 @@
 				<div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 					<div class="panel-body">
 						<br>
+						<!-- awal -->
+						<?php if ($magang == NULL ) {
+							echo "<div class='alert' align='Center'>
+  								 <strong>Maaf, saat ini belum ada lowongan magang kerja. </strong>
+								 </div>";
+						} else {
+							foreach ($magang as $key) {	?>
 							<table style="width:90%" align="Center">
 								<thead>
 									<tr>
 										<th><i class="fa fa-user" style="color:	#FFD700; font-size:24px"></i></th>
-										<th><ul style="color: #483D8B; font-family: Corbel; font-size: 30px;">Network Engineer</ul></th>
+										<th><ul style="color: #483D8B; font-family: Corbel; font-size: 30px;"><?php echo $key['job_position']; ?></ul></th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td><i class="fa fa-unlink" style="color:	#FFD700; font-size:24px"></i></td>
-										<td><ul style=" font-family: Corbel;">Education : Bachelor in IT/Electrical/Telecommunication/Computer Engineering/Computer Science or related fields.
-Language : Good communication skill in English
-Experience :
-- in technical (handling project) as network engineer 1~3 years
-- Must from IT vendor company, SIer, network career
-Skill :
-- Good knowledge on networking, routing and LAN/WAN.
-- Has certification of CCNA, CCNP is an advantage.
-Other : Independent, Willing to learn new thing, Logical thinking</ul></td>
+										<td><ul style=" font-family: Corbel;"><?php echo $key['job_desc'];?></ul></td>
 									</tr>
 								</tbody>
 								<tbody>
 									<td><i class="fa fa-map-marker" style="color:	#FFD700; font-size:24px"></i></td>
-									<td><ul style="font-family: Corbel;">Gresik, Jatim</ul></td>
+									<td><ul style="font-family: Corbel;"><?php echo $key['job_location']?></ul></td>
 								</tbody>
 								<tbody>
 									<td><i class="fa fa-calendar" style="color:	#FFD700; font-size:24px"></i></td>
-									<td><ul style="font-family: Corbel;">02 Februari 2020 -  03 Maret 2020</ul></td>
+									<td><ul style="font-family: Corbel;"><?php echo date('d F Y',  strtotime($key['date_create']))?> - <?php echo date('d F Y',  strtotime($key['date_close'])) ?></ul></td>
 								</tbody>
 								<tbody>
 									<td><i class="fa fa-inbox" style="color:	#FFD700; font-size:24px"></i></td>
 									<td><a style="font-family: Corbel;" href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqVPGJkJNXdbTZXcJZpQdlnqCpfjbGxVldvtbWLjxNlRnvjkbghFthwWWrMbjdKSnrfnPg">recruitment@triratnadiesel.co.id</a></td>
 								</tbody>
-							</table>
+							</table><br>
+							<?php } }?>
+							<!-- akhir -->
 					</div>
 				</div>
 				</div>
@@ -148,35 +149,34 @@ Other : Independent, Willing to learn new thing, Logical thinking</ul></td>
 					</div>
 					<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 						<div class="panel-body"><br>
+							<!-- mulai -->
+							<?php if ($karir == NULL) {
+								echo "<div class='alert' align='Center'>
+  								<strong>Maaf, saat ini belum ada lowongan pekerjaan. </strong>
+								</div>";
+							} else {
+							foreach ($karir as $key) { ?>
 							<table style="width:90%" align="Center">
 								<thead>
 									<tr>
 										<th><i class="fa fa-user" style="color:	#FFD700; font-size:24px"></i></th>
-										<th><ul style="color: #483D8B; font-family: Corbel; font-size: 30px;">Network Engineer</ul></th>
+										<th><ul style="color: #483D8B; font-family: Corbel; font-size: 30px;"><?php echo $key['job_position']; ?></ul></th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td><i class="fa fa-unlink" style="color:	#FFD700; font-size:24px"></i></td>
-										<td><ul style=" font-family: Corbel;">Education : Bachelor in IT/Electrical/Telecommunication/Computer Engineering/Computer Science or related fields.
-Language : Good communication skill in English
-Experience :
-- in technical (handling project) as network engineer 1~3 years
-- Must from IT vendor company, SIer, network career
-Skill :
-- Good knowledge on networking, routing and LAN/WAN.
-- Has certification of CCNA, CCNP is an advantage.
-Other : Independent, Willing to learn new thing, Logical thinking</ul></td>
+										<td><ul style=" font-family: Corbel;"><?php echo $key['job_desc']; ?></ul></td>
 									</tr>
 								</tbody>
 								<tbody>
 									<td><i class="fa fa-map-marker" style="color:	#FFD700; font-size:24px"></i></td>
-									<td><ul style="font-family: Corbel;">Gresik, Jatim</ul></td>
+									<td><ul style="font-family: Corbel;"><?php echo $key['job_location']?></ul></td>
 								</tbody>
 								<tbody>
 									<td><i class="fa fa-calendar" style="color:	#FFD700; font-size:24px"></i></td>
-									<td><ul style="font-family: Corbel;">02 Februari 2020 -  03 Maret 2020</ul></td>
+									<td><ul style="font-family: Corbel;"><?php echo date('d F Y',  strtotime($key['date_create']))?> - <?php echo date('d F Y',  strtotime($key['date_close'])) ?></ul></td>
 								</tbody>
 								<tbody>
 									<td><i class="fa fa-inbox" style="color:	#FFD700; font-size:24px"></i></td>
@@ -184,43 +184,8 @@ Other : Independent, Willing to learn new thing, Logical thinking</ul></td>
 								</tbody>
 							</table>
 							<br><br>
-							<table style="width:90%" align="Center">
-								<thead>
-									<tr>
-										<th><i class="fa fa-user" style="color:	#FFD700; font-size:24px"></i></th>
-										<th><ul style="color: #483D8B; font-family: Corbel; font-size: 30px;">Operational Director</ul></th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><i class="fa fa-unlink" style="color:	#FFD700; font-size:24px"></i></td>
-										<td><ul style=" font-family: Corbel;">
-											Education :Bachelor (Engineering/technical background)
-Language :
-Good in English (oral and written) and computer literate(Neo4 upper)
-Experience :
-Experiences as an Operational Director(Min 3 year)
-Experience in B2B and B2C (preference from FMCG or Lubricant Sector)
-※ direct sales activities, marketing and handle dealers
-Experience in project management and handling a large team.
-Driver Licence :SIM A
-										</ul></td>
-									</tr>
-								</tbody>
-								<tbody>
-									<td><i class="fa fa-map-marker" style="color:	#FFD700; font-size:24px"></i></td>
-									<td><ul style="font-family: Corbel;">Lamongan, Jatim</ul></td>
-								</tbody>
-																<tbody>
-									<td><i class="fa fa-calendar" style="color:	#FFD700; font-size:24px"></i></td>
-									<td><ul style="font-family: Corbel;">02 Februari 2020 -  03 Maret 2020</ul></td>
-								</tbody>
-								<tbody>
-									<td><i class="fa fa-inbox" style="color:	#FFD700; font-size:24px"></i></td>
-									<td><a style="font-family: Corbel;" href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqVPGJkJNXdbTZXcJZpQdlnqCpfjbGxVldvtbWLjxNlRnvjkbghFthwWWrMbjdKSnrfnPg">recruitment@triratnadiesel.co.id</a></td>
-								</tbody>
-							</table>
+							<?php } }?>
+							<!-- akhir -->
 						</div>
 					</div>
 				</div>

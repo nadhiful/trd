@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>Event | PT Tri Ratna Diesel Indonesia</title>
+	<title>Kontak | PT Tri Ratna Diesel Indonesia</title>
 	<meta charset="UTF-8">
 	
 	<!-- Favicon -->
@@ -18,6 +18,7 @@
 
 	<!-- Main Stylesheets -->
 	<link rel="stylesheet" href="<?php site_url();?>../assets/user/css/style.css"/>
+
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -55,18 +56,18 @@
 			<!-- Menu -->
 			<nav class="site-nav-menu">
 				<ul>
-					<li><a href="<?php site_url();?>../home">Beranda</a></li>
-					<li><a href="<?php site_url();?>../home/profil">Profil</a></li>
+					<li><a href="<?php site_url();?>../Home">Beranda</a></li>
+					<li><a href="<?php site_url();?>../Home/profil">Profil</a></li>
 					<li ><a>Unit</a>
 						<ul class="sub-menu">
-							<li><a href="<?php site_url();?>../home/unit_dem">Diesel Engine</a></li>
-							<li><a href="<?php site_url();?>../home/unit_mc">Machining Center</a></li>
-							<li><a href="<?php site_url();?>">Shipyard</a></li>
+							<li><a href="<?php site_url();?>../Home/unit_dem">Diesel Engine</a></li>
+							<li><a href="<?php site_url();?>../Home/unit_mc">Machining Center</a></li>
+							<li><a href="<?php site_url();?>../Home/unit_sm">Shipyard</a></li>
 						</ul>
 					</li>
-					<li class="active"><a href="<?php site_url();?>">Event</a></li>
-					<li><a href="<?php site_url();?>../home/karir">Karir</a></li>
-					<li><a href="<?php site_url();?>../Home/kontak">Kontak</a></li>
+					<li><a href="<?php site_url();?>../Home/galery">Event</a></li>
+					<li><a href="<?php site_url();?>../Home/karir">Karir</a></li>
+					<li  class="active"><a href="<?php site_url();?>../Home/kontak">Kontak</a></li>
 				</ul>
 			</nav>
 
@@ -75,36 +76,27 @@
 	<!-- Header section end  -->
 	
 	<!-- Page top section  -->
-	<section class="page-top-section set-bg" data-setbg="<?php site_url();?>../assets/user/img/page-top-bg/1.jpg">
+	<section class="page-top-section set-bg" data-setbg="<?php site_url();?>../assets/user/img/page-top-bg/4.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7">
-					<h2>Kegiatan Perusahaan</h2>
+					<h2>Kontak</h2>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- Page top section end  -->
+	<!-- Map section end  -->
 
-	<!-- Blog section  -->
-	<section class="blog-section spad">
+	<!-- Contact section   -->
+	<section class="team-section spad">
 		<div class="container">
-			<div class="row">
-				<?php foreach ($event as $key) { ?>
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<div class="blog-post">
-						<div class="blog-thumb set-bg" data-setbg="./../../../tri-ratna-diesel/upload/event/<?php echo $key['images']; ?>">
-							<div class="blog-date"><?php echo date('d M, Y',  strtotime($key['date_event']))?></div>
-						</div>
-						<h5 align="Center"><?php echo $key['title'] ?></h5>
-					</div>
-				</div>
-				<?php } ?>
-			</div>
+			<div class="team-text">
+				<h2  style="color:#FFD700;">Thank You, Contact Form Success Delivered</h2>
+				<p>Your inquiry was submitted and will be responded to as soon as possible. Thank you for contacting us</p>
 		</div>
 	</section>
-	<!-- Blog section end  -->
-	
+	<!-- Contact section end  -->
+	<!-- Call to action section end  -->
 
 	<!-- Footer section -->
 	<footer class="footer-section spad">
@@ -156,10 +148,22 @@
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> PT Tri Ratna Diesel Indonesia
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
 				</div>
+			</div>
 		</div>
 		</div>
 	</footer>
 	<!-- Footer section end -->
+
+	<!-- Search model -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form">
+				<input type="text" id="search-input" placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->	
 	
 	<!--====== Javascripts & Jquery ======-->
 	<script src="<?php site_url();?>../assets/user/js/jquery-3.2.1.min.js"></script>

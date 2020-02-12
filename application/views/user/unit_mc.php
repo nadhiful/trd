@@ -92,12 +92,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<img src="<?php site_url();?>../assets/user/img/uu.jpg" alt="" width="80%" height="80%">
+					<img src="./../../../tri-ratna-diesel/upload/profile/<?php echo $mc->images; ?>" alt="" width="80%" height="80%">
 				</div>
 				<div class="col-lg-6">
 					<div class="about-text">
-						<h2 style="color:#000066;">Machining Center (MC)</h2>
-						<p>Machining Center merupakan proses dari semua pembentukan besi yang akan dimulai dari pengecoran(foundry) hingga finishingnya. Produk yang di supply dari unit ini adalah spare part besi untuk beberapa mesin yang akan diproduksi oleh PT Tri Ratna Diesel seperti : mesin diesel, perkapalan dan pertanian lainnya, berbagai proses pembentukan besi mulai dari perancangan, pola, cetakan, peleburan, hingga finishing semua dilakukan di unit Machining Center.</p>
+						<h2 style="color:#000066;"><?php echo $mc->judul;?></h2>
+						<p><?php echo $mc->isi;?></p>
 					</div>
 				</div>
 			</div>
@@ -112,33 +112,17 @@
 				<h2 style="color:#000066;">Produk Machining Center</h2>
 			</div>
 			<div class="row">
+				<?php foreach ($pmc as $key) { ?>
 				<div class="col-md-4">
 					<div class="team-member">
-						<img src="<?php site_url();?>../assets/user/img/mc.jpg" alt="">
+						<img src="./../../../tri-ratna-diesel/upload/product/<?php echo $key['images']; ?>" alt="">
 						<div class="member-info">
-							<h3>"L" Series</h3>
-							<p>Dilengkapi dengan lampu sebagai sarana penerangan</p>
+							<h3><?php echo $key['nama']?></h3>
+							<p><?php echo $key['deskripsi']?></p>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="team-member">
-						<img src="<?php site_url();?>../assets/user/img/mc.jpg" alt="">
-						<div class="member-info">
-							<h3>"HE" Series</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Hopper</i> serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="team-member">
-						<img src="<?php site_url();?>../assets/user/img/mc.jpg" alt="">
-						<div class="member-info">
-							<h3>"HM" Series</h3>
-							<p>Dilengkapi dengan sistem pendingin <i>Condensor </i>serta <i>Electric Starter</i></p>
-						</div>
-					</div>
-				</div>
+			<?php } ?>
 			</div>
 		</div>
 	</section>

@@ -99,7 +99,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<img src="./../../../tri_ratna_diesel/upload/profile/<?php echo $sm->images; ?>" alt="" width="90%" height="90%">
+					<img src="./../../../tri-ratna-diesel/upload/profile/<?php echo $sm->images; ?>" alt="" width="90%" height="90%">
 				</div>
 				<div class="col-lg-6">
 					<div class="about-text">
@@ -122,7 +122,7 @@
 				<?php foreach ($psm as $key) { ?>
 				<div class="col-md-4">
 					<div class="team-member" align="Center">
-						<img src="./../../../tri_ratna_diesel/upload/product/<?php echo $key['images']; ?>" alt="" width="250px" height="200px">
+						<img src="./../../../tri-ratna-diesel/upload/product/<?php echo $key['images']; ?>" alt="" width="250px" height="200px">
 						<div class="member-info">
 							<h3><?php echo $key['nama']?></h3>
 							<p><?PHP echo $key['deskripsi']?></p>
