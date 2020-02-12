@@ -9,7 +9,7 @@ class Model_admin extends CI_Model {
 		parent::__construct();
 
 	}
-// ============Modul Login=======================//
+// ============Modul Login=========================================//
 	function check_user()
 	{
 		$username = set_value('username');
@@ -24,7 +24,7 @@ class Model_admin extends CI_Model {
 			return array();
 		}
 	}
-//============Modul Get Data All==================//
+//============Modul Get Data All==================================//
 	function get_data($trigger)
 	{
 		if ($trigger=="vision") {
@@ -60,9 +60,31 @@ class Model_admin extends CI_Model {
 			}else{
 				return array();
 			}
+		}elseif($trigger == "marine"){
+			$hasil =  $this->db->select('a.id_product,a.nama,a.deskripsi,b.nama as kategori,a.images')
+							   ->from('product as a')
+							   ->join('kategori_product as b','a.id_kategori = b.id','inner')
+							   ->where('a.id_kategori = 2')
+							   ->get();
+			if ($hasil->num_rows() > 0 ) {
+				return $hasil->result();
+			}else{
+				return array();
+			}
+		}elseif($trigger == "machine"){
+			$hasil =  $this->db->select('a.id_product,a.nama,a.deskripsi,b.nama as kategori,a.images')
+							   ->from('product as a')
+							   ->join('kategori_product as b','a.id_kategori = b.id','inner')
+							   ->where('a.id_kategori = 3')
+							   ->get();
+			if ($hasil->num_rows() > 0 ) {
+				return $hasil->result();
+			}else{
+				return array();
+			}
 		}
 	}
-//============Modul Get Data By ID==================//
+//============Modul Get Data By ID================================//
 	function getdataById($trigger)
 	{
 		if ($trigger == 'profile') {
@@ -115,7 +137,7 @@ class Model_admin extends CI_Model {
 				}
 		}
 	}
-//====================Modul Upload Gambar ========================//
+//====================Modul Upload Gambar ================================================//
 	private function _uploadImage($trigger,$id)
 	{
 		if ($trigger == 'profile' AND $id == 0) {
@@ -146,6 +168,14 @@ class Model_admin extends CI_Model {
 			$index 						= $this->getKodeProduk("diesel");
 			$name 						= 'diesel_produk_'.$index."_";
 			$folder 					= './upload/product/';
+		}elseif ($trigger == 'marine_produk' && $id == 0) {
+			$index 						= $this->getKodeProduk("marine");
+			$name 						= 'marine_produk_'.$index."_";
+			$folder 					= './upload/product/';
+		}elseif ($trigger == 'machine_produk' && $id == 0) {
+			$index 						= $this->getKodeProduk("machine");
+			$name 						= 'machine_produk_'.$index."_";
+			$folder 					= './upload/product/';
 		}
 
 		$dateString 					= date('Y-m-d');
@@ -169,15 +199,16 @@ class Model_admin extends CI_Model {
 	}
 //====================Modul Delete Gambar ========================//
 
-	private function _deleteImage($trigger,$id)
+    private function _deleteImage($id)
 	{
-	    $product = $this->getdataById("product_diesel",$id);
-	    if ($product->images != "default.jpg") {
-		    $filename = explode(".", $product->image)[0];
-			return array_map('unlink', glob(FCPATH."upload/product/$filename.*"));
-	    }
+	    $product = $this->getdataImageID($id);
+
+	    if ($product  != "default.jpg") {
+           $filename = explode(".", $product)[0];
+	       return array_map('unlink', glob(FCPATH."upload/product/$filename.*"));
+	     }
 	}
-//============Modul Update Data ==================//
+//============Modul Update Data =======================================================================//
 
 	function update_data($trigger)
 	{
@@ -266,7 +297,7 @@ class Model_admin extends CI_Model {
 		}
 
 	}
-//=================Modul Get Input From User ========================//
+//=================Modul Get Input From User ==========================================================//
 	private function getdatafromUserInput($trigger)
 	{
 		$var 	= $trigger ;
@@ -469,10 +500,40 @@ class Model_admin extends CI_Model {
 			        return $data;
 			        return TRUE;
 			}
+		}elseif ($awal == "product-marine") {
+			if ($index == 'a') {
+				$id = 0;
+				$data=array(
+			            'id_product'	=> $this->getKodeProduk("marine"),
+			            'id_kategori'	=> 2,
+			            'nama'			=> $this->input->post('nama'),
+			            'deskripsi'		=> $this->input->post('isi'),
+			            'images'		=> $this->_uploadImage('marine_produk',$id),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			        return $data;
+			        return TRUE;
+			}
+		}elseif ($awal == "product-machine") {
+			if ($index == 'a') {
+				$id = 0;
+				$data=array(
+			            'id_product'	=> $this->getKodeProduk("machine"),
+			            'id_kategori'	=> 3,
+			            'nama'			=> $this->input->post('nama'),
+			            'deskripsi'		=> $this->input->post('isi'),
+			            'images'		=> $this->_uploadImage('machine_produk',$id),
+			            'date_created'	=> date('Y-m-d'),
+			            'date_updated'	=> date('Y-m-d')
+	        		);
+			        return $data;
+			        return TRUE;
+			}
 		}
 
 	}
-//=================Modul Get Insert From User ========================//
+//=================Modul Get Insert From User =========================================================//
 	function insert_data($trigger)
 	{
 		$var 	= $trigger ;
@@ -486,40 +547,126 @@ class Model_admin extends CI_Model {
 				$this->db->insert('product', $var);
 				redirect('Admin/diesel_product');
 			}
-		}
-	}
-//=================Modul Get Delete From User ========================//
-	function delete_data($trigger,$id)
-	{
-		if ($trigger == 'product_diesel_d') 
-		{
-			$this->_deleteImage("diesel",$id);
-			$this->db->where('id_product',$id)
-				 	 ->delete('product');
-			redirect('Admin/diesel_product');
+		}elseif ($awal == 'product' && $tengah == 'marine') {
+			if ($akhir == "a") {
+				$var = $this->getdatafromUserInput("product-marine_a");
+				$this->db->insert('product', $var);
+				redirect('Admin/marine_product');
+			}
+		}elseif ($awal == 'product' && $tengah == 'machine') {
+			if ($akhir == "a") {
+				$var = $this->getdatafromUserInput("product-machine_a");
+				$this->db->insert('product', $var);
+				redirect('Admin/machine_product');
+			}
 		}
 	}
 
-//=========================Panel Get Kode Produk =====================================================//
+//=========================Panel Get Kode Produk =======================================//
    function getKodeProduk($trigger)
     {
-       if ($trigger == 'diesel') {
-            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
-            $kd = "";
-            if($q->num_rows()>0)
-            {
-                foreach($q->result() as $k)
-                {
-                    $tmp = ((int)$k->kd_max)+1;
-                    $kd = sprintf("%03s", $tmp);
-                }
-            }
-            else
-            {
-                $kd = "001";
-            }
-            return "DS-".$kd;
-       }
+    	$resultan = $this->db->select('*')
+    						 ->from('product')
+    						 ->get();
+    	if ($resultan->num_rows() > 0) {
+    		
+	       $kd = "";
+	       $hasil = $this->db->select('id_product')
+	                         ->from('product')
+	                         ->order_by('id_product','DESC')
+	                         ->limit(1)
+	                         ->get();
+	              foreach ($hasil->result() as $key ) {
+	              $result1 = $key->id_product;
+	        }
+	//===========================================================================//
+	       $hasil3 = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product where id_product LIKE '%DS%' ");
+	       foreach ($hasil3->result() as $key3) {
+	                     $tmp3 = ((int)$key3->kd_max)+1;
+	            $kd3 = sprintf("%03s", $tmp3);
+	       }
+
+	       $hasil4 = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product where id_product LIKE '%SM%' ");
+	       foreach ($hasil4->result() as $key4) {
+	                     $tmp4 = ((int)$key4->kd_max)+1;
+	            $kd4 = sprintf("%03s", $tmp4);
+	       }
+
+	       $hasil5 = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product where id_product LIKE '%MC%' ");
+	       foreach ($hasil5->result() as $key5) {
+	                     $tmp5 = ((int)$key5->kd_max)+1;
+	            $kd5 = sprintf("%03s", $tmp5);
+	       }
+	//===========================================================================//
+	       $string = explode('-', $result1);
+	       $pecah1 = $string[0];
+	       $pecah2 = $string[1];
+	       if ($trigger == "diesel" && $pecah1 =="DS") {
+	                     return "DS-".$kd3;
+	       }elseif ($trigger == "diesel" && $pecah1 != "DS") {
+	                     return "DS-".$kd3;
+	       }elseif($trigger == "marine" && $pecah1 =="SM") {
+	                     return "SM-".$kd4;
+	       }elseif ($trigger == "marine" && $pecah1 != "SM") {
+	                     return "SM-".$kd4;
+	       }elseif($trigger == "machine" && $pecah1 =="MC") {
+	                     return "MC-".$kd5;
+	       }elseif ($trigger == "machine" && $pecah1 != "MC") {
+	                     return "MC-".$kd5;
+	       }
+       }else{
+
+	       if ($trigger == 'diesel') {
+	            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+	            
+	            if($q->num_rows()>0)
+	            {
+	                foreach($q->result() as $k)
+	                {
+	                    $tmp = ((int)$k->kd_max)+1;
+	                    $kd = sprintf("%03s", $tmp);
+	                }
+	            }
+	            else
+	            {
+	                $kd = "001";
+	            }
+	            return "DS-".$kd;
+	       }elseif ($trigger == 'marine' ) {
+	            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+	            $kd = "";
+	            if($q->num_rows()>0)
+	            {
+	                foreach($q->result() as $k)
+	                {
+	                    $tmp = ((int)$k->kd_max)+1;
+	                    $kd = sprintf("%03s", $tmp);
+	                }
+	            }
+	            else
+	            {
+	                $kd = "001";
+	            }
+	            return "SM-".$kd;
+	       }elseif ($trigger == 'machine' ) {
+	            $q = $this->db->query("select MAX(RIGHT(id_product,3)) as kd_max from product");
+	            $kd = "";
+	            if($q->num_rows()>0)
+	            {
+	                foreach($q->result() as $k)
+	                {
+	                    $tmp = ((int)$k->kd_max)+1;
+	                    $kd = sprintf("%03s", $tmp);
+	                }
+	            }
+	            else
+	            {
+	                $kd = "001";
+	            }
+	            return "MC-".$kd;
+	       		}
+	    }
+
     }
 //=========================Panel Get Kode Produk =====================================================//
    function getkodeprodukKategori($trigger)
@@ -534,12 +681,58 @@ class Model_admin extends CI_Model {
                 }else{
                 return array();
              }
+        }elseif($trigger == "marine"){
+        	$hasil   =   $this->db->where('id',2)
+                                 ->from('kategori_product')
+                                 ->get();
+            if($hasil->num_rows() > 0){
+                $des = $hasil->result();
+                return $des;
+                }else{
+                return array();
+             }
+        }elseif($trigger == "machine"){
+        	$hasil   =   $this->db->where('id',3)
+                                 ->from('kategori_product')
+                                 ->get();
+            if($hasil->num_rows() > 0){
+                $des = $hasil->result();
+                return $des;
+                }else{
+                return array();
+             }
         }
     }
 //=========================Panel Get Kode Produk =====================================================//
+//=========================Panel Get Data Image ID=====================================================//
+    private function getdataImageID($id)
+    {
+    		$hasil = $this->db->select('*')
+    						  ->where('id_product', $id)
+    						  ->from('product')
+    						  ->limit(1)
+    						  ->get();
+    		foreach ($hasil->result() as $key ) {
+    			$images = $key->images;
+    		}
+    		return $images;    	
+    }
+//=================Modul Get Delete From User =========================================================//
+	function delete_data($trigger,$id)
+	{
+		if ($trigger == 'product_diesel_d'){
+		   $link = 'Admin/diesel_product';
+		}elseif($trigger == 'product_marine_d'){
+			$link = 'Admin/marine_product';
+		}elseif($trigger == 'product_machine_d'){
+			$link = 'Admin/machine_product';
+		}
 
-
-
+			$this->_deleteImage($id);
+			$this->db->where('id_product',$id)
+				 	 ->delete('product');
+			redirect($link,'refresh');
+	}
 
 }
 

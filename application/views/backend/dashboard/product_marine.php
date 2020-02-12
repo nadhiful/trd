@@ -92,7 +92,6 @@
           <!-- /.modal-dialog -->
       </div>    
 
-      
       <div class="modal fade" id="modal-readmore<?php echo $key->id_product?>">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -156,7 +155,7 @@
 
     <div class="modal fade" id="modal-add">
           <div class="modal-dialog">
-            <?php echo form_open_multipart('Data_control/add_product_diesel');?>
+            <?php echo form_open_multipart('Data_control/add_product_marine');?>
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Compose Product</h4>
@@ -227,7 +226,7 @@
         },
     function(){
         $.ajax({
-                  url: "<?php echo base_url('Data_control/delete_product_diesel/')?>" + id,
+                  url: "<?php echo base_url('Data_control/delete_product_marine/')?>" + id,
                   type: "post",
                   data: {id:id},
                   success:function(){

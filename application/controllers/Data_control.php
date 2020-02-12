@@ -92,10 +92,31 @@ class Data_control extends CI_Controller {
     {
         $this->Model_admin->insert_data("product_diesel_a");
     }
-      function delete_product($id)
+      function delete_product_diesel($id)
     {
         $this->Model_admin->delete_data("product_diesel_d",$id);
+
+    } function add_product_marine()
+
+    {
+        $this->Model_admin->insert_data("product_marine_a");
+
+    } function delete_product_marine($id)
+
+    {
+        $this->Model_admin->delete_data("product_marine_d",$id);
+
+    }function add_product_machine()
+
+    {
+        $this->Model_admin->insert_data("product_machine_a");
+
+    } function delete_product_machine($id)
+
+    {
+        $this->Model_admin->delete_data("product_machine_d",$id);
     }
+
 
 }
 
